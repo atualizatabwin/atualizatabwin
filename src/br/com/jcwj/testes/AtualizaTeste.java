@@ -18,7 +18,7 @@ public class AtualizaTeste {
 		
             FTPClient ftp = new FtpConn().getConn();
 
-            //Tabwin.instalaTabwin("C:\\Tabwin", ftp);
+            Tabwin.instalaTabwin("C:\\Tabwin", ftp);
             //Tabwin.atualizaDefinicoesSIH();
             //Tabwin.atualizaDefinicoesSIA();
             //Tabwin.atualizaDefinicoesCIHA();
