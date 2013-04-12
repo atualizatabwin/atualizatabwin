@@ -414,10 +414,39 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
             pack();
         }// </editor-fold>//GEN-END:initComponents
     
+    /**
+     * Alterna os controles da Tela entre Ativados e Desativados
+     */
+    private void alternaControles(boolean estado){
+        btAtualizar.setEnabled(estado);
+        edPathTabwin.setEnabled(estado);
+        btSelPasta.setEnabled(estado);
+        checkTabwin.setEnabled(estado);
+        checkSIH.setEnabled(estado);
+        checkSIA.setEnabled(estado);
+        checkCIHA.setEnabled(estado);
+        cbEstados.setEnabled(estado);
+        checkSIH2008.setEnabled(estado);
+        checkSIH2009.setEnabled(estado);
+        checkSIH2010.setEnabled(estado);
+        checkSIH2011.setEnabled(estado);
+        checkSIH2012.setEnabled(estado);
+        checkSIH2013.setEnabled(estado);
+        checkSIA2008.setEnabled(estado);
+        checkSIA2009.setEnabled(estado);
+        checkSIA2010.setEnabled(estado);
+        checkSIA2011.setEnabled(estado);
+        checkSIA2012.setEnabled(estado);
+        checkSIA2013.setEnabled(estado);
+        checkCIHA2011.setEnabled(estado);
+        checkCIHA2012.setEnabled(estado);
+        checkCIHA2013.setEnabled(estado);
+    }
+    
     private void btAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAtualizarActionPerformed
         
-        btAtualizar.setEnabled(false);
         textLog.setText("");
+        alternaControles(false);
         
         ConfigAtualizacao config = new ConfigAtualizacao();
         
@@ -446,6 +475,14 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
         if (checkCIHA2012.isSelected()) { config.addDadosCIHA("12"); }
         if (checkCIHA2013.isSelected()) { config.addDadosCIHA("13"); }
         
+        if (!config.temOpcaoSelecionada()) {
+            JOptionPane.showMessageDialog(AtualizaTabwinMain.this, 
+                    "Você deve selecionar pelo menos uma das opções de Atualização", "Atualização Tabwin",
+                    JOptionPane.INFORMATION_MESSAGE);
+            alternaControles(true);
+            return;
+        }
+        
         final AtualizaWorker work = new AtualizaWorker(textLog, config);
         
         work.addPropertyChangeListener(new PropertyChangeListener() {
@@ -461,6 +498,7 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
                     case DONE:
                         bpGeral.setVisible(false);
                         btAtualizar.setEnabled(true);
+                        alternaControles(true);
                         try {
                             String termino = work.get();
                             JOptionPane.showMessageDialog(AtualizaTabwinMain.this, "Atualização Concluída", "Atualização Tabwin",
@@ -490,7 +528,7 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
         work.execute();
         
     }//GEN-LAST:event_btAtualizarActionPerformed
-
+    
     private void btSelPastaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSelPastaActionPerformed
         int returnVal = fileChooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {

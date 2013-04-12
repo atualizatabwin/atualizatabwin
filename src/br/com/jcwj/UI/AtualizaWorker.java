@@ -45,10 +45,11 @@ public class AtualizaWorker extends SwingWorker<String, String>  {
         publish("Conectando ao FTP: ftp.datasus.gov.br...");
         FTPClient ftp = new FtpConn().getConn();
         publish("OK \n");
-        setProgress(10);
+        setProgress(5);
         AtualizaWorker.failIfInterrupted();
         
         Tabwin.criaPastas(pathTabwin);
+        setProgress(10);
         
         if (config.isAtuTabwin()) {
             publish("Instalando Aplicativo Tabwin em : " + pathTabwin + "...");

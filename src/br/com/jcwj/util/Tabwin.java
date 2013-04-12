@@ -28,6 +28,22 @@ public class Tabwin {
         if (!dirDados.exists()){
             dirDados.mkdir();
         }
+        
+        File dirDadosSIH = new File(caminho + "\\Dados\\SIH");
+        if (!dirDadosSIH.exists()){
+            dirDadosSIH.mkdir();
+        }
+        
+        File dirDadosSIA = new File(caminho + "\\Dados\\SIA");
+        if (!dirDadosSIA.exists()) {
+            dirDadosSIA.mkdir();
+        }
+        
+        File dirDadosCIHA = new File(caminho + "\\Dados\\CIHA");
+        if (!dirDadosCIHA.exists()){
+            dirDadosCIHA.mkdir();    
+        }
+        
     }
     
     public static void instalaTabwin(String caminho, FTPClient ftpClient) throws IOException {
@@ -37,30 +53,18 @@ public class Tabwin {
     }
     
     public static void atualizaDefinicoesSIH(String caminho, FTPClient ftpClient) throws IOException {
-        File dirDadosSIH = new File(caminho + "\\Dados\\SIH");
-        if (!dirDadosSIH.exists()){
-            dirDadosSIH.mkdir();
-        }
         FtpUtil.downloadArquivo(ftpClient, "/dissemin/publicos/SIHSUS/200801_/Auxiliar/TAB_SIH_2013-01.exe", caminho + "\\download\\TAB_SIH_2013-01.exe");
         ZipUtil.unExeZip(caminho + "\\download\\TAB_SIH_2013-01.exe", caminho + "\\SIH");
         alteraDef.alteraCaminhoDbc(caminho + "\\SIH\\RD2008.DEF", caminho + "\\Dados\\SIH\\RD*.DBC");
     }
     
     public static void atualizaDefinicoesSIA(String caminho, FTPClient ftpClient) throws IOException {
-        File dirDadosSIA = new File(caminho + "\\Dados\\SIA");
-        if (!dirDadosSIA.exists()) {
-            dirDadosSIA.mkdir();
-        }
         FtpUtil.downloadArquivo(ftpClient, "/dissemin/publicos/siasus/200801_/Auxiliar/TAB_SIA_2013-02.exe", caminho + "\\download\\TAB_SIA_2013-02.exe");
         ZipUtil.unExeZip(caminho + "\\download\\TAB_SIA_2013-02.exe", caminho + "\\SIA");
         alteraDef.alteraCaminhoDbc(caminho + "\\SIA\\Produção_2008.DEF", caminho + "\\Dados\\SIA\\PA*.DBC");
     }
     
     public static void atualizaDefinicoesCIHA(String caminho, FTPClient ftpClient) throws IOException {
-        File dirDadosCIHA = new File(caminho + "\\Dados\\CIHA");
-        if (!dirDadosCIHA.exists()){
-            dirDadosCIHA.mkdir();    
-        }
         FtpUtil.downloadArquivo(ftpClient, "/dissemin/publicos/CIHA/201101_/Auxiliar/tab_ciha_201302.exe", caminho + "\\download\\tab_ciha_201302.exe");
         ZipUtil.unExeZip(caminho + "\\download\\tab_ciha_201302.exe", caminho + "\\CIHA");
         alteraDef.alteraCaminhoDbc(caminho + "\\CIHA\\CIHA.DEF", caminho + "\\Dados\\CIHA\\CIHA*.DBC");
