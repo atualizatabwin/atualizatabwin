@@ -25,6 +25,18 @@ public class ConfigAtualizacao {
         this.dadosSIA = new ArrayList();
         this.dadosCIHA = new ArrayList();
     }
+    
+    public boolean temOpcaoSelecionada() {
+        
+        if (atuTabwin || atuSIH || atuSIA || atuCIHA ||
+                dadosSIH.size() > 0 || dadosSIA.size() > 0 || 
+                dadosCIHA.size() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+        
+    }
 
     public List<String> getDadosSIH() {
         return dadosSIH;
