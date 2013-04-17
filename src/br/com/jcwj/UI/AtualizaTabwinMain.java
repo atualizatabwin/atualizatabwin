@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker.StateValue;
 
@@ -76,6 +77,7 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
         checkCIHA2013 = new javax.swing.JCheckBox();
         btSelPasta = new javax.swing.JButton();
         btExecTabwin = new javax.swing.JButton();
+        btSobre = new javax.swing.JButton();
         jPanelBot = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
@@ -91,7 +93,7 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
             fileChooser.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
 
             setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-            setTitle("Atualizador Tabwin");
+            setTitle("Atualizador Tabwin 1.0");
             setIconImage(Toolkit.getDefaultToolkit().getImage("icone48.png"));
             setLocationByPlatform(true);
             setName("mainForm"); // NOI18N
@@ -310,6 +312,13 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
                 }
             });
 
+            btSobre.setText("Sobre");
+            btSobre.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    btSobreActionPerformed(evt);
+                }
+            });
+
             javax.swing.GroupLayout jPanelTopLayout = new javax.swing.GroupLayout(jPanelTop);
             jPanelTop.setLayout(jPanelTopLayout);
             jPanelTopLayout.setHorizontalGroup(
@@ -334,7 +343,9 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
                                     .addGap(18, 18, 18)
                                     .addComponent(btAtualizar)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btExecTabwin))))
+                                    .addComponent(btExecTabwin)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btSobre))))
                         .addGroup(jPanelTopLayout.createSequentialGroup()
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -354,7 +365,8 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addComponent(btAtualizar)
                         .addComponent(btSelPasta)
-                        .addComponent(btExecTabwin))
+                        .addComponent(btExecTabwin)
+                        .addComponent(btSobre))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(checkTabwin)
                     .addGap(5, 5, 5)
@@ -606,6 +618,12 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btExecTabwinActionPerformed
 
+    private void btSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSobreActionPerformed
+        JFrame sobre = new Sobre();
+        sobre.setResizable(false);
+        sobre.setVisible(true);
+    }//GEN-LAST:event_btSobreActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -636,6 +654,7 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
     private javax.swing.JButton btAtualizar;
     private javax.swing.JButton btExecTabwin;
     private javax.swing.JButton btSelPasta;
+    private javax.swing.JButton btSobre;
     private javax.swing.JComboBox cbEstados;
     private javax.swing.JCheckBox checkCIHA;
     private javax.swing.JCheckBox checkCIHA2011;
