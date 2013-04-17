@@ -20,11 +20,14 @@ import javax.swing.SwingWorker.StateValue;
 public class AtualizaTabwinMain extends javax.swing.JFrame {
 
     private String[] listaEstados;
+    private String[] listaEstadosRegex;
+    
     /**
      * Creates new form AtualizaTabwinMain
      */
     public AtualizaTabwinMain() {
         this.listaEstados = new String[]{"AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO"};
+        this.listaEstadosRegex = new String[]{"[Aa][Cc]", "[Aa][Ll]", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "[Ss][Cc]", "SE", "SP", "TO"};
         initComponents();
         bpGeral.setVisible(false);
         cbEstados.setSelectedIndex(23);
@@ -79,8 +82,8 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         textLog = new javax.swing.JTextArea();
         jPanel6 = new javax.swing.JPanel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
+        checkUsaMsbbs = new javax.swing.JCheckBox();
+        checkVerDataFtp = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         bpGeral = new javax.swing.JProgressBar();
 
@@ -382,10 +385,9 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
 
             jTabbedPane1.addTab("Log", jPanel5);
 
-            jCheckBox1.setSelected(true);
-            jCheckBox1.setText("Utilizar o ftp msbbs.datasus.gov.br para baixar dados do SIH.");
+            checkUsaMsbbs.setText("Utilizar o ftp msbbs.datasus.gov.br para baixar dados do SIH.");
 
-            jCheckBox2.setText("Baixar arquivos de dados somente se a data do arquivo remoto foi maior que a do arquivo local");
+            checkVerDataFtp.setText("Baixar arquivos de dados somente se a data do arquivo remoto foi maior que a do arquivo local");
 
             javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
             jPanel6.setLayout(jPanel6Layout);
@@ -394,17 +396,17 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createSequentialGroup()
                     .addContainerGap()
                     .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jCheckBox1)
-                        .addComponent(jCheckBox2))
+                        .addComponent(checkUsaMsbbs)
+                        .addComponent(checkVerDataFtp))
                     .addContainerGap(290, Short.MAX_VALUE))
             );
             jPanel6Layout.setVerticalGroup(
                 jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel6Layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jCheckBox1)
+                    .addComponent(checkUsaMsbbs)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jCheckBox2)
+                    .addComponent(checkVerDataFtp)
                     .addContainerGap(109, Short.MAX_VALUE))
             );
 
@@ -503,6 +505,9 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
         config.setAtuSIA(checkSIA.isSelected());
         config.setAtuCIHA(checkCIHA.isSelected());
         config.setUfDados(listaEstados[cbEstados.getSelectedIndex()]);
+        config.setUfDadosRegex(listaEstadosRegex[cbEstados.getSelectedIndex()]);
+        config.setUsarMsbbsSih(checkUsaMsbbs.isSelected());
+        config.setVerDataFtp(checkVerDataFtp.isSelected());
         
         if (checkSIH2008.isSelected()) { config.addDadosSIH("08"); }
         if (checkSIH2009.isSelected()) { config.addDadosSIH("09"); }
@@ -651,10 +656,10 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
     private javax.swing.JCheckBox checkSIH2012;
     private javax.swing.JCheckBox checkSIH2013;
     private javax.swing.JCheckBox checkTabwin;
+    private javax.swing.JCheckBox checkUsaMsbbs;
+    private javax.swing.JCheckBox checkVerDataFtp;
     private javax.swing.JTextField edPathTabwin;
     private javax.swing.JFileChooser fileChooser;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

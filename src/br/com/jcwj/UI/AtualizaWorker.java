@@ -41,6 +41,8 @@ public class AtualizaWorker extends SwingWorker<String, String>  {
         
         String pathTabwin = config.getPathTabwin();
         String ufDados = config.getUfDados();
+        String ufDadosRegex = config.getUfDadosRegex();
+        
         
         publish("Conectando ao FTP: ftp.datasus.gov.br...");
         FTPClient ftp = new FtpConn().getConn("ftp.datasus.gov.br");
@@ -81,27 +83,38 @@ public class AtualizaWorker extends SwingWorker<String, String>  {
         
         int i;       
         
-        // Usar o ftp msbbs, pois os arquivo do SIHD saem antes neste FTP
-        publish("Conectando ao FTP: msbbs.datasus.gov.br...");
-        FTPClient ftp2 = new FtpConn().getConn("msbbs.datasus.gov.br");
-        publish("OK \n");
-        List<String> dadosSIH = config.getDadosSIH();
-        for (i=0; i < dadosSIH.size(); i++) {
-            publish("Atualizando Dados SIH do estado: " + ufDados + " do ano: 20" + dadosSIH.get(i) + "...");
-            //Tabwin.downloadDados(ftp, "/dissemin/publicos/SIHSUS/200801_/Dados", pathTabwin + "\\Dados\\SIH\\", "RD" + ufDados + dadosSIH.get(i) + "[0-9]{2}.[Dd][Bb][Cc]");
-            Tabwin.downloadDados(ftp2, "/Arquivos_Publicos/Estado_sc/", pathTabwin + "\\Dados\\SIH\\", "[Rr][Dd]" + ufDados.toLowerCase()  + dadosSIH.get(i) + "[0-9]{2}.[Dd][Bb][Cc]");
-            publish("OK \n");
+        if (config.isUsarMsbbsSih()) {
+            // Usa o ftp msbbs, pois os arquivo do SIHD(Reduzida AIH) saem antes neste FTP
+            publish("Conectando ao FTP: msbbs.datasus.gov.br...");
+            FTPClient ftp2 = new FtpConn().getConn("msbbs.datasus.gov.br");
+            publish("OK \n");    
+            List<String> dadosSIH = config.getDadosSIH();
+            for (i=0; i < dadosSIH.size(); i++) {
+                publish("Atualizando Dados SIH do estado: " + ufDados + " do ano: 20" + dadosSIH.get(i) + "...");
+                Tabwin.downloadDados(ftp2, config.isVerDataFtp(), "/Arquivos_Publicos/Estado_sc/", pathTabwin + "\\Dados\\SIH\\", "[Rr][Dd]" + ufDadosRegex  + dadosSIH.get(i) + "[0-9]{2}.[Dd][Bb][Cc]");
+                publish("OK \n");
+            }
+            publish("Desconectando do FTP: msbbs.datasus.gov.br...");
+            ftp2.logout();
+            ftp2.disconnect();
+        } else {
+            // Usa o ftp padrão.
+            List<String> dadosSIH = config.getDadosSIH();
+            for (i=0; i < dadosSIH.size(); i++) {
+                publish("Atualizando Dados SIH do estado: " + ufDados + " do ano: 20" + dadosSIH.get(i) + "...");
+                Tabwin.downloadDados(ftp, config.isVerDataFtp(), "/dissemin/publicos/SIHSUS/200801_/Dados", pathTabwin + "\\Dados\\SIH\\", "[Rr][Dd]" + ufDadosRegex + dadosSIH.get(i) + "[0-9]{2}.[Dd][Bb][Cc]");
+                publish("OK \n");
+            }
         }
-        publish("Desconectando do FTP: msbbs.datasus.gov.br...");
-        ftp2.logout();
-        ftp2.disconnect();
+        
+        
         publish("OK \n");
         setProgress(65);
         
         List<String> dadosSIA = config.getDadosSIA();
         for (i=0; i < dadosSIA.size(); i++) {
             publish("Atualizando Dados SIA do estado: " + ufDados + " do ano: 20" + dadosSIA.get(i) + "...");
-            Tabwin.downloadDados(ftp, "/dissemin/publicos/SIASUS/200801_/Dados", pathTabwin + "\\Dados\\SIA\\", "PA" + ufDados + dadosSIA.get(i) + "[0-9]{2}.[Dd][Bb][Cc]");
+            Tabwin.downloadDados(ftp, config.isVerDataFtp(), "/dissemin/publicos/SIASUS/200801_/Dados", pathTabwin + "\\Dados\\SIA\\", "PA" + ufDadosRegex + dadosSIA.get(i) + "[0-9]{2}.[Dd][Bb][Cc]");
             publish("OK \n");
         }
         setProgress(75);
@@ -109,7 +122,7 @@ public class AtualizaWorker extends SwingWorker<String, String>  {
         List<String> dadosCIHA = config.getDadosCIHA();
         for (i=0; i < dadosCIHA.size(); i++) {
             publish("Atualizando Dados CIHA do estado: " + ufDados + " do ano: 20" + dadosCIHA.get(i) + "...");
-            Tabwin.downloadDados(ftp, "/dissemin/publicos/CIHA/201101_/Dados", pathTabwin + "\\Dados\\CIHA\\", "CIHA" + ufDados + dadosCIHA.get(i) + "[0-9]{2}.[Dd][Bb][Cc]");
+            Tabwin.downloadDados(ftp, config.isVerDataFtp(), "/dissemin/publicos/CIHA/201101_/Dados", pathTabwin + "\\Dados\\CIHA\\", "CIHA" + ufDadosRegex + dadosCIHA.get(i) + "[0-9]{2}.[Dd][Bb][Cc]");
             publish("OK \n");
         }
         setProgress(85);

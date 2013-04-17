@@ -11,10 +11,13 @@ public class ConfigAtualizacao {
 
     private String pathTabwin;
     private String ufDados;
+    private String ufDadosRegex;
     private boolean atuTabwin;
     private boolean atuSIH;
     private boolean atuSIA;
     private boolean atuCIHA;
+    private boolean usarMsbbsSih;
+    private boolean verDataFtp;
     
     private List<String> dadosSIH;
     private List<String> dadosSIA;
@@ -78,6 +81,14 @@ public class ConfigAtualizacao {
         this.ufDados = ufDados;
     }
 
+    public String getUfDadosRegex() {
+        return ufDadosRegex;
+    }
+
+    public void setUfDadosRegex(String ufDadosRegex) {
+        this.ufDadosRegex = ufDadosRegex;
+    }
+    
     public boolean isAtuTabwin() {
         return atuTabwin;
     }
@@ -110,4 +121,20 @@ public class ConfigAtualizacao {
         this.atuCIHA = atuCIHA;
     }
     
+    public boolean isUsarMsbbsSih() {
+        return usarMsbbsSih;
+    }
+
+    public void setUsarMsbbsSih(boolean usarMsbbsSih) {
+        this.usarMsbbsSih = usarMsbbsSih;
+    }
+
+    public boolean isVerDataFtp() {
+        return verDataFtp;
+    }
+
+    public void setVerDataFtp(boolean verDataFtp) {
+        this.verDataFtp = verDataFtp;
+    }
+     
 }

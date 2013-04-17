@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPFileFilter;
+import org.joda.time.DateTime;
 
 /**
  *
@@ -71,7 +72,7 @@ public class Tabwin {
         
     }
     
-    public static void downloadDados(FTPClient ftpClient, String dirRemoto, String dirLocal, final String regexArq) throws IOException{
+    public static void downloadDados(FTPClient ftpClient, boolean verData, String dirRemoto, String dirLocal, final String regexArq) throws IOException{
         
         ftpClient.changeWorkingDirectory(dirRemoto);
         FTPFileFilter ff = new FTPFileFilter() {
@@ -82,10 +83,24 @@ public class Tabwin {
                 }
             };
         FTPFile[] arquivos = ftpClient.listFiles(dirRemoto, ff);  
-            for( int i=0; i < arquivos.length; i++ ) {  
-              //System.out.println( arquivos[i].getName() + " / " + arquivos[i].getSize() + " / " + String.format("%1$td/%1$tm/%1$tY %1$tH:%1$tM", arquivos[i].getTimestamp()) );  
-              FtpUtil.downloadArquivo(ftpClient, arquivos[i].getName(), dirLocal + arquivos[i].getName());
-              FtpUtil.setaDataHoraArquivo(dirLocal + arquivos[i].getName(), arquivos[i].getTimestamp());
+            for( int i=0; i < arquivos.length; i++ ) {
+                DateTime dataRemoto = new DateTime(arquivos[i].getTimestamp());
+
+                File arqDados = new File(dirLocal + arquivos[i].getName());
+                if(arqDados.exists() && verData){
+                    DateTime dataLocal = new DateTime(arqDados.lastModified());
+                    if (dataRemoto.isAfter(dataLocal)) {
+                        System.out.println("O arquivo remoto é mais novo");
+                        FtpUtil.downloadArquivo(ftpClient, arquivos[i].getName(), dirLocal + arquivos[i].getName());
+                        FtpUtil.setaDataHoraArquivo(dirLocal + arquivos[i].getName(), arquivos[i].getTimestamp());
+                    } else {
+                        System.out.println("Arquivo já esta atualizado");
+                    }
+                } else {
+                    //System.out.println( arquivos[i].getName() + " / " + arquivos[i].getSize() + " / " + String.format("%1$td/%1$tm/%1$tY %1$tH:%1$tM", arquivos[i].getTimestamp()) );  
+                    FtpUtil.downloadArquivo(ftpClient, arquivos[i].getName(), dirLocal + arquivos[i].getName());
+                    FtpUtil.setaDataHoraArquivo(dirLocal + arquivos[i].getName(), arquivos[i].getTimestamp());
+                }
             }  
         
     }
