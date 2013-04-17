@@ -12,12 +12,13 @@ public class FtpConn {
     
     private FTPClient ftp;
     
-    public FTPClient getConn() {
+    public FTPClient getConn(String urlFtp) {
         
         this.ftp = new FTPClient();
         int reply;
         try {
-            ftp.connect("ftp.datasus.gov.br");
+            ftp.connect(urlFtp);
+            //ftp.connect("ftp.datasus.gov.br");
             //ftp.connect("msbbs.datasus.gov.br"); 
             reply = ftp.getReplyCode();
             if (!FTPReply.isPositiveCompletion(reply))

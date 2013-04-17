@@ -43,7 +43,7 @@ public class AtualizaWorker extends SwingWorker<String, String>  {
         String ufDados = config.getUfDados();
         
         publish("Conectando ao FTP: ftp.datasus.gov.br...");
-        FTPClient ftp = new FtpConn().getConn();
+        FTPClient ftp = new FtpConn().getConn("ftp.datasus.gov.br");
         publish("OK \n");
         setProgress(5);
         AtualizaWorker.failIfInterrupted();
@@ -79,13 +79,23 @@ public class AtualizaWorker extends SwingWorker<String, String>  {
         }
         setProgress(50);
         
-        int i;        
+        int i;       
+        
+        // Usar o ftp msbbs, pois os arquivo do SIHD saem antes neste FTP
+        publish("Conectando ao FTP: msbbs.datasus.gov.br...");
+        FTPClient ftp2 = new FtpConn().getConn("msbbs.datasus.gov.br");
+        publish("OK \n");
         List<String> dadosSIH = config.getDadosSIH();
         for (i=0; i < dadosSIH.size(); i++) {
             publish("Atualizando Dados SIH do estado: " + ufDados + " do ano: 20" + dadosSIH.get(i) + "...");
-            Tabwin.downloadDados(ftp, "/dissemin/publicos/SIHSUS/200801_/Dados", pathTabwin + "\\Dados\\SIH\\", "RD" + ufDados + dadosSIH.get(i) + "[0-9]{2}.[Dd][Bb][Cc]");
+            //Tabwin.downloadDados(ftp, "/dissemin/publicos/SIHSUS/200801_/Dados", pathTabwin + "\\Dados\\SIH\\", "RD" + ufDados + dadosSIH.get(i) + "[0-9]{2}.[Dd][Bb][Cc]");
+            Tabwin.downloadDados(ftp2, "/Arquivos_Publicos/Estado_sc/", pathTabwin + "\\Dados\\SIH\\", "[Rr][Dd]" + ufDados.toLowerCase()  + dadosSIH.get(i) + "[0-9]{2}.[Dd][Bb][Cc]");
             publish("OK \n");
         }
+        publish("Desconectando do FTP: msbbs.datasus.gov.br...");
+        ftp2.logout();
+        ftp2.disconnect();
+        publish("OK \n");
         setProgress(65);
         
         List<String> dadosSIA = config.getDadosSIA();

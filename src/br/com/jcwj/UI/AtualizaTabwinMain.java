@@ -74,8 +74,13 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
         btSelPasta = new javax.swing.JButton();
         btExecTabwin = new javax.swing.JButton();
         jPanelBot = new javax.swing.JPanel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         textLog = new javax.swing.JTextArea();
+        jPanel6 = new javax.swing.JPanel();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jCheckBox2 = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         bpGeral = new javax.swing.JProgressBar();
 
@@ -364,15 +369,56 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
             textLog.setFocusable(false);
             jScrollPane1.setViewportView(textLog);
 
+            javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+            jPanel5.setLayout(jPanel5Layout);
+            jPanel5Layout.setHorizontalGroup(
+                jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 777, Short.MAX_VALUE)
+            );
+            jPanel5Layout.setVerticalGroup(
+                jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+            );
+
+            jTabbedPane1.addTab("Log", jPanel5);
+
+            jCheckBox1.setSelected(true);
+            jCheckBox1.setText("Utilizar o ftp msbbs.datasus.gov.br para baixar dados do SIH.");
+
+            jCheckBox2.setText("Baixar arquivos de dados somente se a data do arquivo remoto foi maior que a do arquivo local");
+
+            javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+            jPanel6.setLayout(jPanel6Layout);
+            jPanel6Layout.setHorizontalGroup(
+                jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel6Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jCheckBox1)
+                        .addComponent(jCheckBox2))
+                    .addContainerGap(290, Short.MAX_VALUE))
+            );
+            jPanel6Layout.setVerticalGroup(
+                jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel6Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jCheckBox1)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jCheckBox2)
+                    .addContainerGap(109, Short.MAX_VALUE))
+            );
+
+            jTabbedPane1.addTab("Configurações", jPanel6);
+
             javax.swing.GroupLayout jPanelBotLayout = new javax.swing.GroupLayout(jPanelBot);
             jPanelBot.setLayout(jPanelBotLayout);
             jPanelBotLayout.setHorizontalGroup(
                 jPanelBotLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane1)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             );
             jPanelBotLayout.setVerticalGroup(
                 jPanelBotLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1)
             );
 
             bpGeral.setStringPainted(true);
@@ -444,7 +490,8 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
     }
     
     private void btAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAtualizarActionPerformed
-        
+
+        jTabbedPane1.setSelectedIndex(0);
         textLog.setText("");
         alternaControles(false);
         
@@ -606,6 +653,8 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
     private javax.swing.JCheckBox checkTabwin;
     private javax.swing.JTextField edPathTabwin;
     private javax.swing.JFileChooser fileChooser;
+    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -615,9 +664,12 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanelBot;
     private javax.swing.JPanel jPanelTop;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextArea textLog;
     // End of variables declaration//GEN-END:variables
 }
