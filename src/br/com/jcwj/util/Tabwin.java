@@ -1,5 +1,6 @@
 package br.com.jcwj.util;
 
+import br.com.jcwj.UI.AtualizaWorker;
 import java.io.File;
 import java.io.IOException;
 import java.util.regex.Pattern;
@@ -47,10 +48,11 @@ public class Tabwin {
         
     }
     
-    public static void instalaTabwin(String caminho, FTPClient ftpClient) throws IOException {
-        FtpUtil.downloadArquivo(ftpClient, "/tabwin/tabwin/tab36b.zip", caminho + "\\download\\tab36b.zip");
+    public static boolean instalaTabwin(String caminho, FTPClient ftpClient, AtualizaWorker work) throws IOException {
+        boolean downArq;
+        downArq = FtpUtil.downloadArquivo(ftpClient, "/tabwin/tabwin/tab36b.zip", caminho + "\\download\\tab36b.zip", work);    
         ZipUtil.unZip(caminho + "\\download\\tab36b.zip", caminho);
-
+        return downArq;
     }
     
     public static void atualizaDefinicoesSIH(String caminho, FTPClient ftpClient) throws IOException {

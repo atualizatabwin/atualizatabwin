@@ -40,7 +40,7 @@ public class FtpConn {
                         ftp.disconnect();
                     }
                     catch (IOException f) {
-                    // do nothing
+                        System.err.println("Erro na conexão com o FTP");
                     }
                 }
 		System.err.println("Ocorreu um erro: " + e);

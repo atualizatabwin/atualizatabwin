@@ -36,6 +36,10 @@ public class AtualizaWorker extends SwingWorker<String, String>  {
         this.config = config;
     }
     
+    public void aMsg(String msg){
+        publish(msg + "\n");
+    }
+    
     @Override
     protected String doInBackground() throws Exception {
         
@@ -55,8 +59,11 @@ public class AtualizaWorker extends SwingWorker<String, String>  {
         
         if (config.isAtuTabwin()) {
             publish("Instalando Aplicativo Tabwin em : " + pathTabwin + "...");
-            Tabwin.instalaTabwin(pathTabwin, ftp);
-            publish("OK \n");
+            if (Tabwin.instalaTabwin(pathTabwin, ftp, this)) {
+                publish("OK \n");
+            } else {
+                publish("ERRO \n");
+            }
         }
         setProgress(20);
         
@@ -107,8 +114,6 @@ public class AtualizaWorker extends SwingWorker<String, String>  {
             }
         }
         
-        
-        publish("OK \n");
         setProgress(65);
         
         List<String> dadosSIA = config.getDadosSIA();
