@@ -585,34 +585,7 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
         textLog.setText("");
         alternaControles(false);
         
-        config.setPathTabwin(edPathTabwin.getText());
-        config.setAtuTabwin(checkTabwin.isSelected());        
-        config.setAtuSIH(checkSIH.isSelected());
-        config.setAtuSIA(checkSIA.isSelected());
-        config.setAtuCIHA(checkCIHA.isSelected());
-        config.setUfDados(listaEstados[cbEstados.getSelectedIndex()]);
-        config.setUfDadosRegex(listaEstadosRegex[cbEstados.getSelectedIndex()]);
-        config.setUsarMsbbsSih(checkUsaMsbbs.isSelected());
-        config.setVerDataFtp(checkVerDataFtp.isSelected());
-        config.setEstadoSelecionado(cbEstados.getSelectedIndex());
-        
-        if (checkSIH2008.isSelected()) { config.addDadosSIH("08"); }
-        if (checkSIH2009.isSelected()) { config.addDadosSIH("09"); }
-        if (checkSIH2010.isSelected()) { config.addDadosSIH("10"); }
-        if (checkSIH2011.isSelected()) { config.addDadosSIH("11"); }
-        if (checkSIH2012.isSelected()) { config.addDadosSIH("12"); }
-        if (checkSIH2013.isSelected()) { config.addDadosSIH("13"); }
-        
-        if (checkSIA2008.isSelected()) { config.addDadosSIA("08"); }
-        if (checkSIA2009.isSelected()) { config.addDadosSIA("09"); }
-        if (checkSIA2010.isSelected()) { config.addDadosSIA("10"); }
-        if (checkSIA2011.isSelected()) { config.addDadosSIA("11"); }
-        if (checkSIA2012.isSelected()) { config.addDadosSIA("12"); }
-        if (checkSIA2013.isSelected()) { config.addDadosSIA("13"); }
-        
-        if (checkCIHA2011.isSelected()) { config.addDadosCIHA("11"); }
-        if (checkCIHA2012.isSelected()) { config.addDadosCIHA("12"); }
-        if (checkCIHA2013.isSelected()) { config.addDadosCIHA("13"); }
+        salvaConfigCampos();
 
         if (!config.temOpcaoSelecionada()) {
             JOptionPane.showMessageDialog(AtualizaTabwinMain.this, 
