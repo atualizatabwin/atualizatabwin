@@ -22,16 +22,16 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
 
     private String[] listaEstados;
     private String[] listaEstadosRegex;
+    private ConfigAtualizacao config;
     
     /**
      * Creates new form AtualizaTabwinMain
      */
     public AtualizaTabwinMain() {
-        this.listaEstados = new String[]{"AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO"};
-        this.listaEstadosRegex = new String[]{"[Aa][Cc]", "[Aa][Ll]", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "[Ss][Cc]", "SE", "SP", "TO"};
         initComponents();
         bpGeral.setVisible(false);
-        cbEstados.setSelectedIndex(23);
+        this.config = new ConfigAtualizacao();
+        atualizaCamposConfig();
     }
 
     /**
@@ -93,10 +93,15 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
             fileChooser.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
 
             setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-            setTitle("Atualizador Tabwin 1.0");
+            setTitle("Atualizador Tabwin 1.1");
             setIconImage(Toolkit.getDefaultToolkit().getImage("icone48.png"));
             setLocationByPlatform(true);
             setName("mainForm"); // NOI18N
+            addWindowListener(new java.awt.event.WindowAdapter() {
+                public void windowClosing(java.awt.event.WindowEvent evt) {
+                    formWindowClosing(evt);
+                }
+            });
 
             btAtualizar.setText("Atualizar");
             btAtualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -110,8 +115,6 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
             edPathTabwin.setText("c:\\Tabwin");
 
             jLabel2.setText("Estado:");
-
-            cbEstados.setModel(new javax.swing.DefaultComboBoxModel(listaEstados));
 
             checkTabwin.setSelected(true);
             checkTabwin.setText("Instalar/Atualizar o aplicativo Tabwin");
@@ -503,13 +506,84 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
         checkCIHA2013.setEnabled(estado);
     }
     
+    /**
+     * Atualiza os campos da Tela lendo o arquivo de config
+     */
+    private void atualizaCamposConfig(){
+        config.carregarConfiguracao();
+        edPathTabwin.setText(config.getPathTabwin());
+        checkTabwin.setSelected(config.isAtuTabwin());
+        checkSIH.setSelected(config.isAtuSIH());
+        checkSIA.setSelected(config.isAtuSIA());
+        checkCIHA.setSelected(config.isAtuCIHA());
+        checkUsaMsbbs.setSelected(config.isUsarMsbbsSih());
+        checkVerDataFtp.setSelected(config.isVerDataFtp());
+        this.listaEstados = config.getEstados();
+        this.listaEstadosRegex = config.getEstadosRegex();
+        cbEstados.setModel(new javax.swing.DefaultComboBoxModel(listaEstados));
+        cbEstados.setSelectedIndex(config.getEstadoSelecionado());
+
+        checkSIH2008.setSelected(config.getDadosSIH().contains("08"));
+        checkSIH2009.setSelected(config.getDadosSIH().contains("09"));
+        checkSIH2010.setSelected(config.getDadosSIH().contains("10"));
+        checkSIH2011.setSelected(config.getDadosSIH().contains("11"));
+        checkSIH2012.setSelected(config.getDadosSIH().contains("12"));
+        checkSIH2013.setSelected(config.getDadosSIH().contains("13"));
+        
+        checkSIA2008.setSelected(config.getDadosSIA().contains("08"));
+        checkSIA2009.setSelected(config.getDadosSIA().contains("09"));
+        checkSIA2010.setSelected(config.getDadosSIA().contains("10"));
+        checkSIA2011.setSelected(config.getDadosSIA().contains("11"));
+        checkSIA2012.setSelected(config.getDadosSIA().contains("12"));
+        checkSIA2013.setSelected(config.getDadosSIA().contains("13"));
+        
+        checkCIHA2011.setSelected(config.getDadosCIHA().contains("11"));
+        checkCIHA2012.setSelected(config.getDadosCIHA().contains("12"));
+        checkCIHA2013.setSelected(config.getDadosCIHA().contains("13"));
+        
+    }
+    
+    /**
+     * Salva na configuração os campos da Tela
+     */
+    private void salvaConfigCampos(){
+        config.setPathTabwin(edPathTabwin.getText());
+        config.setAtuTabwin(checkTabwin.isSelected());        
+        config.setAtuSIH(checkSIH.isSelected());
+        config.setAtuSIA(checkSIA.isSelected());
+        config.setAtuCIHA(checkCIHA.isSelected());
+        config.setUfDados(listaEstados[cbEstados.getSelectedIndex()]);
+        config.setUfDadosRegex(listaEstadosRegex[cbEstados.getSelectedIndex()]);
+        config.setUsarMsbbsSih(checkUsaMsbbs.isSelected());
+        config.setVerDataFtp(checkVerDataFtp.isSelected());
+        config.setEstadoSelecionado(cbEstados.getSelectedIndex());
+        
+        if (checkSIH2008.isSelected()) { config.addDadosSIH("08"); } else { config.delDadosSIH("08"); }
+        if (checkSIH2009.isSelected()) { config.addDadosSIH("09"); } else { config.delDadosSIH("09"); }
+        if (checkSIH2010.isSelected()) { config.addDadosSIH("10"); } else { config.delDadosSIH("10"); }
+        if (checkSIH2011.isSelected()) { config.addDadosSIH("11"); } else { config.delDadosSIH("11"); }
+        if (checkSIH2012.isSelected()) { config.addDadosSIH("12"); } else { config.delDadosSIH("12"); }
+        if (checkSIH2013.isSelected()) { config.addDadosSIH("13"); } else { config.delDadosSIH("13"); }
+        
+        if (checkSIA2008.isSelected()) { config.addDadosSIA("08"); } else { config.delDadosSIA("08"); }
+        if (checkSIA2009.isSelected()) { config.addDadosSIA("09"); } else { config.delDadosSIA("09"); }
+        if (checkSIA2010.isSelected()) { config.addDadosSIA("10"); } else { config.delDadosSIA("10"); }
+        if (checkSIA2011.isSelected()) { config.addDadosSIA("11"); } else { config.delDadosSIA("11"); }
+        if (checkSIA2012.isSelected()) { config.addDadosSIA("12"); } else { config.delDadosSIA("12"); }
+        if (checkSIA2013.isSelected()) { config.addDadosSIA("13"); } else { config.delDadosSIA("13"); }
+        
+        if (checkCIHA2011.isSelected()) { config.addDadosCIHA("11"); } else { config.delDadosCIHA("11"); }
+        if (checkCIHA2012.isSelected()) { config.addDadosCIHA("12"); } else { config.delDadosCIHA("12"); }
+        if (checkCIHA2013.isSelected()) { config.addDadosCIHA("13"); } else { config.delDadosCIHA("13"); }
+        
+        config.salvarConfiguracao();
+    }
+    
     private void btAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAtualizarActionPerformed
 
         jTabbedPane1.setSelectedIndex(0);
         textLog.setText("");
         alternaControles(false);
-        
-        ConfigAtualizacao config = new ConfigAtualizacao();
         
         config.setPathTabwin(edPathTabwin.getText());
         config.setAtuTabwin(checkTabwin.isSelected());        
@@ -520,6 +594,7 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
         config.setUfDadosRegex(listaEstadosRegex[cbEstados.getSelectedIndex()]);
         config.setUsarMsbbsSih(checkUsaMsbbs.isSelected());
         config.setVerDataFtp(checkVerDataFtp.isSelected());
+        config.setEstadoSelecionado(cbEstados.getSelectedIndex());
         
         if (checkSIH2008.isSelected()) { config.addDadosSIH("08"); }
         if (checkSIH2009.isSelected()) { config.addDadosSIH("09"); }
@@ -538,7 +613,7 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
         if (checkCIHA2011.isSelected()) { config.addDadosCIHA("11"); }
         if (checkCIHA2012.isSelected()) { config.addDadosCIHA("12"); }
         if (checkCIHA2013.isSelected()) { config.addDadosCIHA("13"); }
-        
+
         if (!config.temOpcaoSelecionada()) {
             JOptionPane.showMessageDialog(AtualizaTabwinMain.this, 
                     "Você deve selecionar pelo menos uma das opções de Atualização", "Atualização Tabwin",
@@ -623,6 +698,10 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
         sobre.setResizable(false);
         sobre.setVisible(true);
     }//GEN-LAST:event_btSobreActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        salvaConfigCampos();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

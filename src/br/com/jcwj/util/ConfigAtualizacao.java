@@ -1,13 +1,21 @@
 package br.com.jcwj.util;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  *
  * @author julio
  */
 public class ConfigAtualizacao {
+    
+    Properties properties;
 
     private String pathTabwin;
     private String ufDados;
@@ -23,10 +31,23 @@ public class ConfigAtualizacao {
     private List<String> dadosSIA;
     private List<String> dadosCIHA;
     
+    private String[] listaEstados;
+    private String[] listaEstadosRegex;
+    private int estadoSelecionado;
+    
+    private String diretorioUsuario;
+    private String arquivoConfig;
+    
     public ConfigAtualizacao() {
-        this.dadosSIH = new ArrayList();
-        this.dadosSIA = new ArrayList();
-        this.dadosCIHA = new ArrayList();
+        this.dadosSIH = new ArrayList<String>();
+        this.dadosSIA = new ArrayList<String>();
+        this.dadosCIHA = new ArrayList<String>();
+        
+        this.listaEstados = new String[]{"AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO"};
+        this.listaEstadosRegex = new String[]{"[Aa][Cc]", "[Aa][Ll]", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "[Ss][Cc]", "SE", "SP", "TO"};
+       
+        this.diretorioUsuario = System.getProperty("user.home");
+        this.arquivoConfig = diretorioUsuario + "\\atualizatabwin.cfg";
     }
     
     public boolean temOpcaoSelecionada() {
@@ -39,6 +60,73 @@ public class ConfigAtualizacao {
             return false;
         }
         
+    }
+    
+    public void salvarConfiguracao(){
+        properties = new Properties();
+        
+        properties.setProperty("ufDados", ufDados);
+        properties.setProperty("pathTabwin", pathTabwin);
+        properties.setProperty("atuTabwin", Boolean.toString(atuTabwin));
+        properties.setProperty("atuSIH", Boolean.toString(atuSIH));
+        properties.setProperty("atuSIA", Boolean.toString(atuSIA));
+        properties.setProperty("atuCIHA", Boolean.toString(atuCIHA));
+        properties.setProperty("usarMsbbsSih", Boolean.toString(usarMsbbsSih));
+        properties.setProperty("verDataFtp", Boolean.toString(verDataFtp));
+        properties.setProperty("estadoSelecionado", Integer.toString(estadoSelecionado));
+        properties.setProperty("anosSIH", StringUtils.join(dadosSIH, "|"));
+        properties.setProperty("anosSIA", StringUtils.join(dadosSIA, "|"));
+        properties.setProperty("anosCIHA", StringUtils.join(dadosCIHA, "|"));
+
+        try {
+            FileOutputStream fos = new FileOutputStream(arquivoConfig);
+            properties.store(fos, "CONFIG Atualiza Tabwin");
+            fos.close();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
+    
+    public void carregarConfiguracao(){
+        properties = new Properties();
+ 
+        try {
+            FileInputStream fis = new FileInputStream(arquivoConfig);
+            properties.load(fis);
+        } catch (IOException e) {
+            System.out.println("Arquivo de configuracao nao encontrado");
+        }        
+        
+        this.ufDados = properties.getProperty("ufDados", "SC");
+        this.pathTabwin = properties.getProperty("pathTabwin", "C:\\Tabwin");
+        this.atuTabwin = Boolean.parseBoolean(properties.getProperty("atuTabwin", "true"));
+        this.atuSIH = Boolean.parseBoolean(properties.getProperty("atuSIH", "true"));
+        this.atuSIA = Boolean.parseBoolean(properties.getProperty("atuSIA", "true"));
+        this.atuCIHA = Boolean.parseBoolean(properties.getProperty("atuCIHA", "true"));
+        this.usarMsbbsSih = Boolean.parseBoolean(properties.getProperty("usarMsbbsSih", "false"));
+        this.verDataFtp = Boolean.parseBoolean(properties.getProperty("verDataFtp", "false"));
+        this.estadoSelecionado = Integer.parseInt(properties.getProperty("estadoSelecionado", "23"));
+        this.dadosSIH = new ArrayList<String>(Arrays.asList(StringUtils.split(properties.getProperty("anosSIH", "12|13"), "|")));
+        this.dadosSIA = new ArrayList<String>(Arrays.asList(StringUtils.split(properties.getProperty("anosSIA", "12|13"), "|")));
+        this.dadosCIHA = new ArrayList<String>(Arrays.asList(StringUtils.split(properties.getProperty("anosCIHA", "12|13"), "|")));
+
+    }
+    
+    public String[] getEstados() {
+        return listaEstados;
+    }
+    
+    public String[] getEstadosRegex() {
+        return listaEstadosRegex;
+    }
+    
+    public void setEstadoSelecionado(int estadoSelecionado){
+        this.estadoSelecionado = estadoSelecionado;
+    }
+    
+    public int getEstadoSelecionado() {
+        return estadoSelecionado;
     }
 
     public List<String> getDadosSIH() {
@@ -54,15 +142,41 @@ public class ConfigAtualizacao {
     }
     
     public void addDadosSIH(String ano) {
-        this.dadosSIH.add(ano);
+        if (!dadosSIH.contains(ano)) {
+            this.dadosSIH.add(ano);            
+        }
+
+    }
+    
+    public void delDadosSIH(String ano) {
+        if (dadosSIH.contains(ano)) {
+            dadosSIH.remove(ano);
+        }
+
     }
     
     public void addDadosSIA(String ano) {
-        this.dadosSIA.add(ano);
+        if (!dadosSIA.contains(ano)) {
+            this.dadosSIA.add(ano);
+        }
+    }
+    
+    public void delDadosSIA(String ano) {
+        if (dadosSIA.contains(ano)) {
+            this.dadosSIA.remove(ano);
+        }
     }
     
     public void addDadosCIHA(String ano) {
-        this.dadosCIHA.add(ano);
+        if (!dadosCIHA.contains(ano)) {
+            this.dadosCIHA.add(ano);
+        }
+    }
+    
+    public void delDadosCIHA(String ano) {
+        if (dadosCIHA.contains(ano)) {
+            this.dadosCIHA.remove(ano);
+        }
     }
 
     public String getPathTabwin() {

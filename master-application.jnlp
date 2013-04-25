@@ -12,7 +12,7 @@
         <!--${JNLP.ICONS}-->
         <!--${JNLP.OFFLINE.ALLOWED}-->
     </information>
-    <update check="always" policy="prompt-update"/>
+    <update check="always" policy="always"/>
     <!--${JNLP.SECURITY}-->
     <resources>
         <!--${JNLP.RESOURCES.RUNTIME}-->
