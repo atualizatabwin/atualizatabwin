@@ -7,6 +7,8 @@ import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.List;
+import javax.swing.JLabel;
+import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
 import javax.swing.SwingWorker;
 import org.apache.commons.net.ftp.FTPClient;
@@ -26,18 +28,21 @@ public class AtualizaWorker extends SwingWorker<String, String>  {
 
     private final JTextArea log;
     private final ConfigAtualizacao config;
+    private final JLabel downArq;
     
     /**
      *
      * @param log
      */
-    public AtualizaWorker(final JTextArea log, final ConfigAtualizacao config){
+    public AtualizaWorker(final JTextArea log, final ConfigAtualizacao config, JLabel downArq){
         this.log = log;
         this.config = config;
+        this.downArq = downArq;
     }
     
-    public void aMsg(String msg){
-        publish(msg + "\n");
+    public void aMsg(String msg, int bytes){
+        downArq.setText(msg);
+        firePropertyChange("fileProgress",(Integer) 0,(Integer) bytes);
     }
     
     @Override
@@ -69,21 +74,21 @@ public class AtualizaWorker extends SwingWorker<String, String>  {
         
         if (config.isAtuSIH()) {
             publish("Atualizando Definições SIH...");
-            Tabwin.atualizaDefinicoesSIH(pathTabwin, ftp);
+            Tabwin.atualizaDefinicoesSIH(pathTabwin, ftp, this);
             publish("OK \n");
         }
         setProgress(30);
         
         if (config.isAtuSIA()) {
             publish("Atualizando Definições SIA...");
-            Tabwin.atualizaDefinicoesSIA(pathTabwin, ftp);
+            Tabwin.atualizaDefinicoesSIA(pathTabwin, ftp, this);
             publish("OK \n");
         }
         setProgress(40);
         
         if (config.isAtuCIHA()) {
             publish("Atualizando Definições CIHA...");
-            Tabwin.atualizaDefinicoesCIHA(pathTabwin, ftp);
+            Tabwin.atualizaDefinicoesCIHA(pathTabwin, ftp, this);
             publish("OK \n");
         }
         setProgress(50);
@@ -98,7 +103,7 @@ public class AtualizaWorker extends SwingWorker<String, String>  {
             List<String> dadosSIH = config.getDadosSIH();
             for (i=0; i < dadosSIH.size(); i++) {
                 publish("Atualizando Dados SIH do estado: " + ufDados + " do ano: 20" + dadosSIH.get(i) + "...");
-                Tabwin.downloadDados(ftp2, config.isVerDataFtp(), "/Arquivos_Publicos/Estado_sc/", pathTabwin + "\\Dados\\SIH\\", "[Rr][Dd]" + ufDadosRegex  + dadosSIH.get(i) + "[0-9]{2}.[Dd][Bb][Cc]");
+                Tabwin.downloadDados(ftp2, config.isVerDataFtp(), "/Arquivos_Publicos/Estado_sc/", pathTabwin + "\\Dados\\SIH\\", "[Rr][Dd]" + ufDadosRegex  + dadosSIH.get(i) + "[0-9]{2}.[Dd][Bb][Cc]", this);
                 publish("OK \n");
             }
             publish("Desconectando do FTP: msbbs.datasus.gov.br...");
@@ -109,7 +114,7 @@ public class AtualizaWorker extends SwingWorker<String, String>  {
             List<String> dadosSIH = config.getDadosSIH();
             for (i=0; i < dadosSIH.size(); i++) {
                 publish("Atualizando Dados SIH do estado: " + ufDados + " do ano: 20" + dadosSIH.get(i) + "...");
-                Tabwin.downloadDados(ftp, config.isVerDataFtp(), "/dissemin/publicos/SIHSUS/200801_/Dados", pathTabwin + "\\Dados\\SIH\\", "[Rr][Dd]" + ufDadosRegex + dadosSIH.get(i) + "[0-9]{2}.[Dd][Bb][Cc]");
+                Tabwin.downloadDados(ftp, config.isVerDataFtp(), "/dissemin/publicos/SIHSUS/200801_/Dados", pathTabwin + "\\Dados\\SIH\\", "[Rr][Dd]" + ufDadosRegex + dadosSIH.get(i) + "[0-9]{2}.[Dd][Bb][Cc]", this);
                 publish("OK \n");
             }
         }
@@ -119,7 +124,7 @@ public class AtualizaWorker extends SwingWorker<String, String>  {
         List<String> dadosSIA = config.getDadosSIA();
         for (i=0; i < dadosSIA.size(); i++) {
             publish("Atualizando Dados SIA do estado: " + ufDados + " do ano: 20" + dadosSIA.get(i) + "...");
-            Tabwin.downloadDados(ftp, config.isVerDataFtp(), "/dissemin/publicos/SIASUS/200801_/Dados", pathTabwin + "\\Dados\\SIA\\", "PA" + ufDadosRegex + dadosSIA.get(i) + "[0-9]{2}.[Dd][Bb][Cc]");
+            Tabwin.downloadDados(ftp, config.isVerDataFtp(), "/dissemin/publicos/SIASUS/200801_/Dados", pathTabwin + "\\Dados\\SIA\\", "PA" + ufDadosRegex + dadosSIA.get(i) + "[0-9]{2}.[Dd][Bb][Cc]", this);
             publish("OK \n");
         }
         setProgress(75);
@@ -127,7 +132,7 @@ public class AtualizaWorker extends SwingWorker<String, String>  {
         List<String> dadosCIHA = config.getDadosCIHA();
         for (i=0; i < dadosCIHA.size(); i++) {
             publish("Atualizando Dados CIHA do estado: " + ufDados + " do ano: 20" + dadosCIHA.get(i) + "...");
-            Tabwin.downloadDados(ftp, config.isVerDataFtp(), "/dissemin/publicos/CIHA/201101_/Dados", pathTabwin + "\\Dados\\CIHA\\", "CIHA" + ufDadosRegex + dadosCIHA.get(i) + "[0-9]{2}.[Dd][Bb][Cc]");
+            Tabwin.downloadDados(ftp, config.isVerDataFtp(), "/dissemin/publicos/CIHA/201101_/Dados", pathTabwin + "\\Dados\\CIHA\\", "CIHA" + ufDadosRegex + dadosCIHA.get(i) + "[0-9]{2}.[Dd][Bb][Cc]", this);
             publish("OK \n");
         }
         setProgress(85);

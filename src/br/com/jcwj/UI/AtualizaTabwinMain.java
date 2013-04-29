@@ -29,7 +29,7 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
      */
     public AtualizaTabwinMain() {
         initComponents();
-        bpGeral.setVisible(false);
+        jPanel2.setVisible(false);
         this.config = new ConfigAtualizacao();
         atualizaCamposConfig();
     }
@@ -88,15 +88,19 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
         checkVerDataFtp = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         bpGeral = new javax.swing.JProgressBar();
+        lbDescDown = new javax.swing.JLabel();
+        bpDownArq = new javax.swing.JProgressBar();
+        lbDownArq = new javax.swing.JLabel();
 
         fileChooser.setCurrentDirectory(new java.io.File("C:\\"));
             fileChooser.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
 
             setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-            setTitle("Atualizador Tabwin 1.1");
+            setTitle("Atualizador Tabwin 1.2");
             setIconImage(Toolkit.getDefaultToolkit().getImage("icone48.png"));
             setLocationByPlatform(true);
             setName("mainForm"); // NOI18N
+            setPreferredSize(new java.awt.Dimension(800, 490));
             addWindowListener(new java.awt.event.WindowAdapter() {
                 public void windowClosing(java.awt.event.WindowEvent evt) {
                     formWindowClosing(evt);
@@ -391,11 +395,11 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
             jPanel5.setLayout(jPanel5Layout);
             jPanel5Layout.setHorizontalGroup(
                 jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 777, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 795, Short.MAX_VALUE)
             );
             jPanel5Layout.setVerticalGroup(
                 jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
             );
 
             jTabbedPane1.addTab("Log", jPanel5);
@@ -413,7 +417,7 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
                     .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(checkUsaMsbbs)
                         .addComponent(checkVerDataFtp))
-                    .addContainerGap(290, Short.MAX_VALUE))
+                    .addContainerGap(308, Short.MAX_VALUE))
             );
             jPanel6Layout.setVerticalGroup(
                 jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -422,7 +426,7 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
                     .addComponent(checkUsaMsbbs)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(checkVerDataFtp)
-                    .addContainerGap(109, Short.MAX_VALUE))
+                    .addContainerGap(152, Short.MAX_VALUE))
             );
 
             jTabbedPane1.addTab("Configurações", jPanel6);
@@ -440,20 +444,39 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
 
             bpGeral.setStringPainted(true);
 
+            lbDescDown.setText("Download do arquivo:");
+
+            bpDownArq.setStringPainted(true);
+
             javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
             jPanel2.setLayout(jPanel2Layout);
             jPanel2Layout.setHorizontalGroup(
                 jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(bpGeral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(bpGeral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(bpDownArq, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lbDescDown)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lbDownArq)
+                            .addGap(0, 0, Short.MAX_VALUE)))
                     .addContainerGap())
             );
             jPanel2Layout.setVerticalGroup(
                 jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(bpGeral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbDescDown)
+                            .addComponent(lbDownArq))
+                        .addComponent(bpDownArq, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(bpGeral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(18, 18, 18))
             );
 
             javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -467,11 +490,11 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
             layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addComponent(jPanelTop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanelTop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(jPanelBot, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, Short.MAX_VALUE))
             );
 
             pack();
@@ -540,7 +563,7 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
         checkCIHA2011.setSelected(config.getDadosCIHA().contains("11"));
         checkCIHA2012.setSelected(config.getDadosCIHA().contains("12"));
         checkCIHA2013.setSelected(config.getDadosCIHA().contains("13"));
-        
+
     }
     
     /**
@@ -586,6 +609,7 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
         alternaControles(false);
         
         salvaConfigCampos();
+        jPanel2.setVisible(true);
 
         if (!config.temOpcaoSelecionada()) {
             JOptionPane.showMessageDialog(AtualizaTabwinMain.this, 
@@ -595,7 +619,7 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
             return;
         }
         
-        final AtualizaWorker work = new AtualizaWorker(textLog, config);
+        final AtualizaWorker work = new AtualizaWorker(textLog, config, lbDownArq);
         
         work.addPropertyChangeListener(new PropertyChangeListener() {
             @Override
@@ -605,10 +629,13 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
                 if ("progress".equals(nomeProp)) {
                     bpGeral.setIndeterminate(false);
                     bpGeral.setValue((Integer) event.getNewValue());
+                } else if ("fileProgress".equals(nomeProp)){
+                    bpDownArq.setIndeterminate(false);
+                    bpDownArq.setValue((Integer) event.getNewValue());
                 } else if("state".equals(nomeProp)) {
                     switch ((StateValue) event.getNewValue()) {
                     case DONE:
-                        bpGeral.setVisible(false);
+                        jPanel2.setVisible(false);
                         btAtualizar.setEnabled(true);
                         alternaControles(true);
                         try {
@@ -626,8 +653,9 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
                         break;
                     case STARTED:
                     case PENDING:
-                        bpGeral.setVisible(true);
+                        jPanel2.setVisible(true);
                         bpGeral.setIndeterminate(true);
+                        bpDownArq.setIndeterminate(true);
                         break;
                     }
                     
@@ -702,6 +730,7 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JProgressBar bpDownArq;
     private javax.swing.JProgressBar bpGeral;
     private javax.swing.JButton btAtualizar;
     private javax.swing.JButton btExecTabwin;
@@ -746,6 +775,8 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelTop;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel lbDescDown;
+    private javax.swing.JLabel lbDownArq;
     private javax.swing.JTextArea textLog;
     // End of variables declaration//GEN-END:variables
 }

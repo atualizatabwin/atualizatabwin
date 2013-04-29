@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Calendar;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.output.CountingOutputStream;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
@@ -60,9 +61,17 @@ public class FtpUtil {
     * @throws IOException if any network or IO error occurred.
     */
     public static boolean downloadArquivo(FTPClient ftpClient, String arquivoRemoto,
-        String arquivoLocal, final AtualizaWorker work) throws IOException {
+        final String arquivoLocal, final AtualizaWorker work) throws IOException {
         
+        final int totBytesArq;
+        final String nomeArq;
+        FTPFile[] arqRem = ftpClient.listFiles(arquivoRemoto);
+        totBytesArq = (int) arqRem[0].getSize();
+
         File downloadFile = new File(arquivoLocal);
+        nomeArq = downloadFile.getName();
+        work.aMsg(nomeArq + " - 0/" + totBytesArq, 0);
+        final long start = System.nanoTime();
         OutputStream outputStream = new BufferedOutputStream(
             new FileOutputStream(downloadFile));
         
@@ -70,16 +79,14 @@ public class FtpUtil {
             @Override
             protected void beforeWrite(int n){
                 super.beforeWrite(n);
-                work.aMsg("Downloaded " + getCount());
+                double speed = 1000000000.0 * getCount() / (System.nanoTime() - start + 1);
+                work.aMsg(nomeArq + " - " + getCount() + "/" + totBytesArq + " (" +FileUtils.byteCountToDisplaySize((long) speed) + "/s)" , Math.round(((float)getCount() / totBytesArq)*100));
             }
         };
         
+        
         try {
             ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
-            
-            FTPFile[] arqRem = ftpClient.listFiles(arquivoRemoto);
-            work.aMsg(Long.toString(arqRem[0].getSize()));
-
             return ftpClient.retrieveFile(arquivoRemoto, cos);
         } catch (IOException ex) {
             throw ex;

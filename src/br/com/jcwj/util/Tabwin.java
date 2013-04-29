@@ -55,26 +55,26 @@ public class Tabwin {
         return downArq;
     }
     
-    public static void atualizaDefinicoesSIH(String caminho, FTPClient ftpClient) throws IOException {
-        FtpUtil.downloadArquivo(ftpClient, "/dissemin/publicos/SIHSUS/200801_/Auxiliar/TAB_SIH_2013-01.exe", caminho + "\\download\\TAB_SIH_2013-01.exe");
+    public static void atualizaDefinicoesSIH(String caminho, FTPClient ftpClient, AtualizaWorker work) throws IOException {
+        FtpUtil.downloadArquivo(ftpClient, "/dissemin/publicos/SIHSUS/200801_/Auxiliar/TAB_SIH_2013-01.exe", caminho + "\\download\\TAB_SIH_2013-01.exe", work);
         ZipUtil.unExeZip(caminho + "\\download\\TAB_SIH_2013-01.exe", caminho + "\\SIH");
         alteraDef.alteraCaminhoDbc(caminho + "\\SIH\\RD2008.DEF", caminho + "\\Dados\\SIH\\RD*.DBC");
     }
     
-    public static void atualizaDefinicoesSIA(String caminho, FTPClient ftpClient) throws IOException {
-        FtpUtil.downloadArquivo(ftpClient, "/dissemin/publicos/siasus/200801_/Auxiliar/TAB_SIA_2013-02.exe", caminho + "\\download\\TAB_SIA_2013-02.exe");
+    public static void atualizaDefinicoesSIA(String caminho, FTPClient ftpClient, AtualizaWorker work) throws IOException {
+        FtpUtil.downloadArquivo(ftpClient, "/dissemin/publicos/siasus/200801_/Auxiliar/TAB_SIA_2013-02.exe", caminho + "\\download\\TAB_SIA_2013-02.exe", work);
         ZipUtil.unExeZip(caminho + "\\download\\TAB_SIA_2013-02.exe", caminho + "\\SIA");
         alteraDef.alteraCaminhoDbc(caminho + "\\SIA\\Produção_2008.DEF", caminho + "\\Dados\\SIA\\PA*.DBC");
     }
     
-    public static void atualizaDefinicoesCIHA(String caminho, FTPClient ftpClient) throws IOException {
-        FtpUtil.downloadArquivo(ftpClient, "/dissemin/publicos/CIHA/201101_/Auxiliar/tab_ciha_201302.exe", caminho + "\\download\\tab_ciha_201302.exe");
+    public static void atualizaDefinicoesCIHA(String caminho, FTPClient ftpClient, AtualizaWorker work) throws IOException {
+        FtpUtil.downloadArquivo(ftpClient, "/dissemin/publicos/CIHA/201101_/Auxiliar/tab_ciha_201302.exe", caminho + "\\download\\tab_ciha_201302.exe", work);
         ZipUtil.unExeZip(caminho + "\\download\\tab_ciha_201302.exe", caminho + "\\CIHA");
         alteraDef.alteraCaminhoDbc(caminho + "\\CIHA\\CIHA.DEF", caminho + "\\Dados\\CIHA\\CIHA*.DBC");
         
     }
     
-    public static void downloadDados(FTPClient ftpClient, boolean verData, String dirRemoto, String dirLocal, final String regexArq) throws IOException{
+    public static void downloadDados(FTPClient ftpClient, boolean verData, String dirRemoto, String dirLocal, final String regexArq, AtualizaWorker work) throws IOException{
         
         ftpClient.changeWorkingDirectory(dirRemoto);
         FTPFileFilter ff = new FTPFileFilter() {
@@ -93,14 +93,14 @@ public class Tabwin {
                     DateTime dataLocal = new DateTime(arqDados.lastModified());
                     if (dataRemoto.isAfter(dataLocal)) {
                         System.out.println("O arquivo remoto é mais novo");
-                        FtpUtil.downloadArquivo(ftpClient, arquivos[i].getName(), dirLocal + arquivos[i].getName());
+                        FtpUtil.downloadArquivo(ftpClient, arquivos[i].getName(), dirLocal + arquivos[i].getName(), work);
                         FtpUtil.setaDataHoraArquivo(dirLocal + arquivos[i].getName(), arquivos[i].getTimestamp());
                     } else {
                         System.out.println("Arquivo já esta atualizado");
                     }
                 } else {
                     //System.out.println( arquivos[i].getName() + " / " + arquivos[i].getSize() + " / " + String.format("%1$td/%1$tm/%1$tY %1$tH:%1$tM", arquivos[i].getTimestamp()) );  
-                    FtpUtil.downloadArquivo(ftpClient, arquivos[i].getName(), dirLocal + arquivos[i].getName());
+                    FtpUtil.downloadArquivo(ftpClient, arquivos[i].getName(), dirLocal + arquivos[i].getName(), work);
                     FtpUtil.setaDataHoraArquivo(dirLocal + arquivos[i].getName(), arquivos[i].getTimestamp());
                 }
             }  
