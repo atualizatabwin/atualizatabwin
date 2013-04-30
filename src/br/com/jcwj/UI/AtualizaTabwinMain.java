@@ -6,13 +6,13 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.net.URL;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker.StateValue;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -23,12 +23,15 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
     private String[] listaEstados;
     private String[] listaEstadosRegex;
     private ConfigAtualizacao config;
+    private static final Logger logger = LoggerFactory.getLogger(AtualizaTabwinMain.class);
     
     /**
      * Creates new form AtualizaTabwinMain
      */
     public AtualizaTabwinMain() {
         initComponents();
+        URL url = AtualizaTabwinMain.class.getResource("icone48.png");
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(url));
         jPanel2.setVisible(false);
         this.config = new ConfigAtualizacao();
         atualizaCamposConfig();
@@ -97,7 +100,6 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
 
             setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
             setTitle("Atualizador Tabwin 1.2");
-            setIconImage(Toolkit.getDefaultToolkit().getImage("icone48.png"));
             setLocationByPlatform(true);
             setName("mainForm"); // NOI18N
             setPreferredSize(new java.awt.Dimension(800, 490));
@@ -395,7 +397,7 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
             jPanel5.setLayout(jPanel5Layout);
             jPanel5Layout.setHorizontalGroup(
                 jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 795, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 777, Short.MAX_VALUE)
             );
             jPanel5Layout.setVerticalGroup(
                 jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -417,7 +419,7 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
                     .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(checkUsaMsbbs)
                         .addComponent(checkVerDataFtp))
-                    .addContainerGap(308, Short.MAX_VALUE))
+                    .addContainerGap(290, Short.MAX_VALUE))
             );
             jPanel6Layout.setVerticalGroup(
                 jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -690,7 +692,7 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(AtualizaTabwinMain.this, "Não foi possível executar: " + cmd , "Tabwin",
                                 JOptionPane.ERROR_MESSAGE);
-            Logger.getLogger(AtualizaTabwinMain.class.getName()).log(Level.SEVERE, null, ex);
+            logger.error("Erro ao executar o Tabwin em: " + cmd);
         }
     }//GEN-LAST:event_btExecTabwinActionPerformed
 
