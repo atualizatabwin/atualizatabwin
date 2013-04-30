@@ -30,7 +30,7 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
      */
     public AtualizaTabwinMain() {
         initComponents();
-        URL url = AtualizaTabwinMain.class.getResource("icone48.png");
+        URL url = AtualizaTabwinMain.class.getResource("/icone48.png");
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(url));
         jPanel2.setVisible(false);
         this.config = new ConfigAtualizacao();
@@ -154,21 +154,22 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(checkSIH2008)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(checkSIH2009)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(checkSIH2010)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(checkSIH2011))
                         .addComponent(jLabel3)
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addComponent(checkSIH2012)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(checkSIH2013))
-                        .addComponent(checkSIH))
-                    .addContainerGap(32, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(checkSIH, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(checkSIH2008)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(checkSIH2009)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(checkSIH2010)))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(checkSIH2011))))
             );
             jPanel1Layout.setVerticalGroup(
                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,7 +177,7 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
                     .addComponent(checkSIH)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(jLabel3)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(checkSIH2008)
                         .addComponent(checkSIH2009)
