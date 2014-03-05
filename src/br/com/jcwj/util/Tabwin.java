@@ -65,7 +65,7 @@ public class Tabwin {
         FTPFileFilter ff = new FTPFileFilter() {
                 @Override
                 public boolean accept(FTPFile file) {
-                    return Pattern.matches("[Tt][Aa][Bb]_[Ss][Ii][Hh]_[0-9]{4}-[0-9]{2}.[Ee][Xx][Ee]", file.getName());
+                    return Pattern.matches("[Tt][Aa][Bb]_[Ss][Ii][Hh]_[0-9]{4}[-_]?[0-9]{2}.[Ee][Xx][Ee]", file.getName());
                 }
             };
         FTPFile[] arquivos = ftpClient.listFiles(dirRemoto, ff);  
@@ -80,14 +80,50 @@ public class Tabwin {
     }
     
     public static void atualizaDefinicoesSIA(String caminho, FTPClient ftpClient, AtualizaWorker work) throws IOException {
-        FtpUtil.downloadArquivo(ftpClient, "/dissemin/publicos/siasus/200801_/Auxiliar/TAB_SIA_2013-02.exe", caminho + "\\download\\TAB_SIA_2013-02.exe", work);
-        ZipUtil.unExeZip(caminho + "\\download\\TAB_SIA_2013-02.exe", caminho + "\\SIA");
+        
+        String dirRemoto = "/dissemin/publicos/siasus/200801_/Auxiliar/";
+        String dirLocal = caminho + "\\download\\";
+        String nomeArq;
+        ftpClient.changeWorkingDirectory(dirRemoto);
+        
+        FTPFileFilter ff = new FTPFileFilter() {
+                @Override
+                public boolean accept(FTPFile file) {
+                    return Pattern.matches("[Tt][Aa][Bb]_[Ss][Ii][Aa]_[0-9]{4}[-_]?[0-9]{2}.[Ee][Xx][Ee]", file.getName());
+                }
+            };
+        FTPFile[] arquivos = ftpClient.listFiles(dirRemoto, ff);
+        for( int i=0; i < arquivos.length; i++ ) {
+            nomeArq = arquivos[i].getName();
+            FtpUtil.downloadArquivo(ftpClient, nomeArq, dirLocal + nomeArq, work);
+            ZipUtil.unExeZip(dirLocal + nomeArq, caminho + "\\SIA");
+        }
+        //FtpUtil.downloadArquivo(ftpClient, "/dissemin/publicos/siasus/200801_/Auxiliar/TAB_SIA_2013-02.exe", caminho + "\\download\\TAB_SIA_2013-02.exe", work);
+        //ZipUtil.unExeZip(caminho + "\\download\\TAB_SIA_2013-02.exe", caminho + "\\SIA");
         alteraDef.alteraCaminhoDbc(caminho + "\\SIA\\Produção_2008.DEF", caminho + "\\Dados\\SIA\\PA*.DBC");
     }
     
     public static void atualizaDefinicoesCIHA(String caminho, FTPClient ftpClient, AtualizaWorker work) throws IOException {
-        FtpUtil.downloadArquivo(ftpClient, "/dissemin/publicos/CIHA/201101_/Auxiliar/tab_ciha_201302.exe", caminho + "\\download\\tab_ciha_201302.exe", work);
-        ZipUtil.unExeZip(caminho + "\\download\\tab_ciha_201302.exe", caminho + "\\CIHA");
+        
+        String dirRemoto = "/dissemin/publicos/CIHA/201101_/Auxiliar/";
+        String dirLocal = caminho + "\\download\\";
+        String nomeArq;
+        ftpClient.changeWorkingDirectory(dirRemoto);
+        
+        FTPFileFilter ff = new FTPFileFilter() {
+                @Override
+                public boolean accept(FTPFile file) {
+                    return Pattern.matches("[Tt][Aa][Bb]_[Cc][Ii][Hh][Aa]_[0-9]{4}[-_]?[0-9]{2}.[Ee][Xx][Ee]", file.getName());
+                }
+            };
+        FTPFile[] arquivos = ftpClient.listFiles(dirRemoto, ff);
+        for( int i=0; i < arquivos.length; i++ ) {
+            nomeArq = arquivos[i].getName();
+            FtpUtil.downloadArquivo(ftpClient, nomeArq, dirLocal + nomeArq, work);
+            ZipUtil.unExeZip(dirLocal + nomeArq, caminho + "\\CIHA");
+        }
+        //FtpUtil.downloadArquivo(ftpClient, "/dissemin/publicos/CIHA/201101_/Auxiliar/tab_ciha_201304.exe", caminho + "\\download\\tab_ciha_201304.exe", work);
+        //ZipUtil.unExeZip(caminho + "\\download\\tab_ciha_201304.exe", caminho + "\\CIHA");
         alteraDef.alteraCaminhoDbc(caminho + "\\CIHA\\CIHA.DEF", caminho + "\\Dados\\CIHA\\CIHA*.DBC");
         
     }
