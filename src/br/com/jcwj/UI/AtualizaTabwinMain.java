@@ -102,7 +102,7 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
             fileChooser.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
 
             setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-            setTitle("Atualizador Tabwin 1.4 - 09/05/2014");
+            setTitle("Atualizador Tabwin 1.6 - 01/08/2014");
             setLocationByPlatform(true);
             setName("mainForm"); // NOI18N
             setPreferredSize(new java.awt.Dimension(800, 490));
@@ -542,15 +542,18 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
         checkSIH2011.setEnabled(estado);
         checkSIH2012.setEnabled(estado);
         checkSIH2013.setEnabled(estado);
+        checkSIH2014.setEnabled(estado);
         checkSIA2008.setEnabled(estado);
         checkSIA2009.setEnabled(estado);
         checkSIA2010.setEnabled(estado);
         checkSIA2011.setEnabled(estado);
         checkSIA2012.setEnabled(estado);
         checkSIA2013.setEnabled(estado);
+        checkSIA2014.setEnabled(estado);
         checkCIHA2011.setEnabled(estado);
         checkCIHA2012.setEnabled(estado);
         checkCIHA2013.setEnabled(estado);
+        checkCIHA2014.setEnabled(estado);
     }
     
     /**
@@ -734,32 +737,7 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         salvaConfigCampos();
     }//GEN-LAST:event_formWindowClosing
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        
-        try {
-            javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AtualizaTabwinMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AtualizaTabwinMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AtualizaTabwinMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AtualizaTabwinMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new AtualizaTabwinMain().setVisible(true);
-            }
-        });
-    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JProgressBar bpDownArq;
     private javax.swing.JProgressBar bpGeral;
