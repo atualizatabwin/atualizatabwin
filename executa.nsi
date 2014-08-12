@@ -1,9 +1,8 @@
 ; Java Launcher Atualiza Tabwin
 ;------------------------------------
- 
 Name "AtualizaTabwin"
 Caption "Atualiza Tabwin"
-Icon "atualizatabwin.ico"
+Icon "icone48.ico"
 OutFile "atualizatabwin.exe"
 
 VIAddVersionKey "ProductName" "Atualiza Tabwin"
@@ -20,8 +19,8 @@ AutoCloseWindow true
 ShowInstDetails nevershow
 
 ;You want to change the next two lines too
-!define CLASSPATH ".;lib;AtualizaTabwin.jar"
-!define CLASS "br.com.jcwj.UI.AtualizaTabwinMain"
+!define CLASSPATH ".;lib;AtUpdate.jar"
+!define CLASS "atupdate.AtUpdateMain"
  
 Section ""
   Call GetJRE
