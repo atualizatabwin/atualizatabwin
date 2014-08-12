@@ -46,7 +46,7 @@ public class FtpConn {
 		System.err.println("Ocorreu um erro: " + e);
 		System.exit(2);
         }
-        
+        ftp.enterLocalPassiveMode();
         return ftp;
     }
     
