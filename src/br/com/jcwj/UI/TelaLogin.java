@@ -1,27 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package br.com.jcwj.UI;
 
-import br.com.jcwj.util.Md5Util;
 import br.com.jcwj.util.LoginHTTP;
+import br.com.jcwj.util.Md5Util;
 import br.com.jcwj.util.ServidorIndisponivelException;
+import br.com.jcwj.util.SysInfo;
 import java.awt.Toolkit;
 import java.io.IOException;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author julio
  */
 public class TelaLogin extends javax.swing.JFrame {
+    
+    private static final Logger logger = LoggerFactory.getLogger(TelaLogin.class);
 
     /**
      * Creates new form TelaLogin
@@ -60,9 +57,6 @@ public class TelaLogin extends javax.swing.JFrame {
         setLocationByPlatform(true);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                formWindowActivated(evt);
-            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -206,17 +200,16 @@ public class TelaLogin extends javax.swing.JFrame {
             return;
         }       
         
-        String senhaCrypt = Md5Util.geraMd5Str(senha);
-        System.out.println("Senha Crypt: " + senhaCrypt);
+        String computador = SysInfo.nomeComputador();
+        String token = Md5Util.geraMd5Str(cnpj + computador);
         
         LoginHTTP httpLogin = new LoginHTTP();
-        String retorno = null;
         try {
-            retorno = httpLogin.login(cnpj, senha);
-            if ("OK".equals(retorno)) {
-                JFrame principal = new AtualizaTabwinMain();
+            String retorno = httpLogin.login(cnpj, senha, computador);
+            
+            if (token.equals(retorno)) {
+                JFrame principal = new AtualizaTabwinMain(cnpj, senha);
                 principal.setResizable(false);
-                principal.setVisible(true);
                 this.dispose();
             } else {
                 JOptionPane.showMessageDialog(TelaLogin.this, "CNPJ ou Senha inválidos. Tente novamente.", "Atualização Tabwin",
@@ -236,16 +229,12 @@ public class TelaLogin extends javax.swing.JFrame {
 
     private void btCriarContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCriarContaActionPerformed
         try {
-            String url = "http://www.atualizatabwin.com.br"; 
+           String url = "http://www.atualizatabwin.com.br"; 
             Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + url);
         } catch (IOException ex) {
-            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
+            logger.error("Erro ao abrir navegador padrao: ", ex);
         }
     }//GEN-LAST:event_btCriarContaActionPerformed
-
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        
-    }//GEN-LAST:event_formWindowActivated
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         this.setLocationRelativeTo(null);
@@ -259,18 +248,13 @@ public class TelaLogin extends javax.swing.JFrame {
         
         try {
             javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            logger.error("Erro ao abrir Form de Login: ", ex);
         }
         
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new TelaLogin().setVisible(true);
             }

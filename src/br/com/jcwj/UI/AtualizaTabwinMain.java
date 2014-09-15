@@ -1,6 +1,10 @@
 package br.com.jcwj.UI;
 
 import br.com.jcwj.util.ConfigAtualizacao;
+import br.com.jcwj.util.LoginHTTP;
+import br.com.jcwj.util.Md5Util;
+import br.com.jcwj.util.ServidorIndisponivelException;
+import br.com.jcwj.util.SysInfo;
 import java.awt.Toolkit;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -20,21 +24,58 @@ import org.slf4j.LoggerFactory;
  */
 public class AtualizaTabwinMain extends javax.swing.JFrame {
 
+    public final static String versao = "1.8";
+    public final static String data = "31/08/2014";
+    
+    private final String cnpj;
+    private final String senha;
+    private final String computador;
+    
     private String[] listaEstados;
     private String[] listaEstadosRegex;
-    private ConfigAtualizacao config;
+    private final ConfigAtualizacao config;
     private static final Logger logger = LoggerFactory.getLogger(AtualizaTabwinMain.class);
     
     /**
      * Creates new form AtualizaTabwinMain
+     * @param cnpj
+     * @param senha
      */
-    public AtualizaTabwinMain() {
-        initComponents();
-        URL url = AtualizaTabwinMain.class.getResource("/icone48.png");
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(url));
-        jPanel2.setVisible(false);
+    public AtualizaTabwinMain(String cnpj, String senha) {
+        this.cnpj = cnpj;
+        this.senha = senha;
+        this.computador = SysInfo.nomeComputador();
         this.config = new ConfigAtualizacao();
-        atualizaCamposConfig();
+        if(loginApp()) {
+            initComponents();
+            this.setResizable(false);
+            this.setVisible(true);
+            URL url = AtualizaTabwinMain.class.getResource("/icone48.png");
+            this.setIconImage(Toolkit.getDefaultToolkit().getImage(url));
+            jPanel2.setVisible(false);
+            this.setTitle(this.getTitle() + " " + versao + " - " + data);
+            atualizaCamposConfig();
+        }
+    }
+    
+    protected final boolean loginApp(){
+        String token = Md5Util.geraMd5Str(cnpj + computador);
+        
+        LoginHTTP httpLogin = new LoginHTTP();
+        try {
+            String retorno = httpLogin.login(cnpj, senha, computador);
+            if (token.equals(retorno)) {
+                return true;
+            } else {
+                logger.error("Erro. Deve ser criado pelo form de Login.");
+                this.setVisible(false);
+                this.dispose();                
+                return false;
+            }             
+        } catch (ServidorIndisponivelException ex) {
+            logger.error("Erro de comunicação com o servidor no login.");
+            return false;
+        }
     }
 
     /**
@@ -102,7 +143,7 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
             fileChooser.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
 
             setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-            setTitle("Atualizador Tabwin 1.6 - 01/08/2014");
+            setTitle("Atualizador Tabwin");
             setLocationByPlatform(true);
             setName("mainForm"); // NOI18N
             setPreferredSize(new java.awt.Dimension(800, 490));

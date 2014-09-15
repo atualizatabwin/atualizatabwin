@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.jcwj.UI;
 
 import java.io.IOException;
@@ -19,6 +15,7 @@ public class Sobre extends javax.swing.JFrame {
      */
     public Sobre() {
         initComponents();
+        lbVersao.setText(AtualizaTabwinMain.versao + " - " + AtualizaTabwinMain.data);
     }
 
     /**
@@ -35,6 +32,7 @@ public class Sobre extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        lbVersao = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Sobre o Atualiza Tabwin");
@@ -62,7 +60,9 @@ public class Sobre extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setText("Versão: 1.4 - 09/05/2014");
+        jLabel5.setText("Versão:");
+
+        lbVersao.setText("versao");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -77,7 +77,10 @@ public class Sobre extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel5)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbVersao))
                             .addComponent(jLabel3))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -91,7 +94,9 @@ public class Sobre extends javax.swing.JFrame {
                         .addGap(10, 10, 10)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(lbVersao))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -108,7 +113,7 @@ public class Sobre extends javax.swing.JFrame {
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         try {
-            String url = "http://www.sdp.org.br"; 
+            String url = "http://www.atualizatabwin.com.br";
             Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + url);
         } catch (IOException ex) {
             Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
@@ -121,5 +126,6 @@ public class Sobre extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel lbVersao;
     // End of variables declaration//GEN-END:variables
 }

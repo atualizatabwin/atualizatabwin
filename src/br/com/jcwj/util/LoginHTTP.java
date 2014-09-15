@@ -12,28 +12,31 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map.Entry;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author julio
  */
 public class LoginHTTP  {
+    
+    private static final Logger logger = LoggerFactory.getLogger(LoginHTTP.class);
 
-    public String login(String cnpj, String senha) throws ServidorIndisponivelException {
+    public String login(String cnpj, String senha, String computador) throws ServidorIndisponivelException {
         
         String urlGet = "http://www.atualizatabwin.com.br/applogin";
         String charset = "UTF-8";
         String params = null;
-        HttpURLConnection connection = null; 
+        HttpURLConnection connection = null;
         
         try {
-            params = String.format("cnpj=%s&senha=%s",
+            params = String.format("cnpj=%s&senha=%s&computador=%s",
                     URLEncoder.encode(cnpj, charset), 
-                    URLEncoder.encode(senha, charset));
+                    URLEncoder.encode(senha, charset),
+                    URLEncoder.encode(computador, charset));
         } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(LoginHTTP.class.getName()).log(Level.SEVERE, null, ex);
+            logger.error("Erro ao montar parametros: ", ex);
         }
                        
         try {
@@ -51,7 +54,7 @@ public class LoginHTTP  {
             }
             
             for (Entry<String, List<String>> header : connection.getHeaderFields().entrySet()) {
-                System.out.println(header.getKey() + "=" + header.getValue());
+                logger.debug(header.getKey() + "=" + header.getValue());
             }
                 
             if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
@@ -61,9 +64,9 @@ public class LoginHTTP  {
                 return retorno;      
             } else {
                 //InputStream error = ((HttpURLConnection) connection).getErrorStream();
-                System.out.println(connection.getResponseCode());
-                System.out.println(connection.getResponseMessage());
-                System.out.println("Retorno de Erro");
+                logger.debug(String.valueOf(connection.getResponseCode()));
+                logger.debug(connection.getResponseMessage());
+                logger.debug("Retorno de Erro");
                 return "ERRO";
             }
         } catch (MalformedURLException e) {

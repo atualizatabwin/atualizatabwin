@@ -31,12 +31,12 @@ public class ConfigAtualizacao {
     private List<String> dadosSIA;
     private List<String> dadosCIHA;
     
-    private String[] listaEstados;
-    private String[] listaEstadosRegex;
+    private final String[] listaEstados;
+    private final String[] listaEstadosRegex;
     private int estadoSelecionado;
     
-    private String diretorioUsuario;
-    private String arquivoConfig;
+    private final String diretorioUsuario;
+    private final String arquivoConfig;
     
     public ConfigAtualizacao() {
         this.dadosSIH = new ArrayList<String>();
@@ -84,7 +84,6 @@ public class ConfigAtualizacao {
             fos.close();
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
-            ex.printStackTrace();
         }
     }
     

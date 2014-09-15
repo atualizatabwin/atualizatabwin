@@ -15,11 +15,11 @@
         </layout>
     </appender>
     <category name="br.com.jcwj">
-        <priority value="TRACE" />
+        <priority value="DEBUG" />
         <appender-ref ref="Arquivo" />
     </category>
     <root>
-        <level value="TRACE" />
+        <level value="DEBUG" />
         <appender-ref ref="stdout" />
     </root>
 </log4j:configuration>
