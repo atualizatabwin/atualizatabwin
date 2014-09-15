@@ -23,7 +23,7 @@ public class LoginHTTP  {
     
     private static final Logger logger = LoggerFactory.getLogger(LoginHTTP.class);
 
-    public String login(String cnpj, String senha, String computador) throws ServidorIndisponivelException {
+    public String login(String usuario, String senha, String computador, String valida) throws ServidorIndisponivelException {
         
         String urlGet = "http://www.atualizatabwin.com.br/applogin";
         String charset = "UTF-8";
@@ -31,10 +31,11 @@ public class LoginHTTP  {
         HttpURLConnection connection = null;
         
         try {
-            params = String.format("cnpj=%s&senha=%s&computador=%s",
-                    URLEncoder.encode(cnpj, charset), 
+            params = String.format("usuario=%s&senha=%s&computador=%s&valida=%s",
+                    URLEncoder.encode(usuario, charset), 
                     URLEncoder.encode(senha, charset),
-                    URLEncoder.encode(computador, charset));
+                    URLEncoder.encode(computador, charset),
+                    URLEncoder.encode(valida, charset));
         } catch (UnsupportedEncodingException ex) {
             logger.error("Erro ao montar parametros: ", ex);
         }

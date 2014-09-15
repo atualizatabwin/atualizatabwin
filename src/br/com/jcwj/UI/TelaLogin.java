@@ -92,7 +92,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(" Dados de acesso "));
 
-        jLabel3.setText("CNPJ:");
+        jLabel3.setText("Usuário:");
 
         jLabel4.setText("Senha:");
 
@@ -190,29 +190,29 @@ public class TelaLogin extends javax.swing.JFrame {
     private void btAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAcessarActionPerformed
 
         lbStatus.setText("Acessando servidor, aguarde...");
-        String cnpj = edConta.getText();
+        String usuario = edConta.getText();
         String senha = new String(edSenha.getPassword());
         
-        if (cnpj.isEmpty() || senha.isEmpty()) {
-            JOptionPane.showMessageDialog(TelaLogin.this, "Informe os campos CNPJ e Senha.", "Atualização Tabwin",
+        if (usuario.isEmpty() || senha.isEmpty()) {
+            JOptionPane.showMessageDialog(TelaLogin.this, "Informe os campos Usuário e Senha.", "Atualização Tabwin",
                     JOptionPane.WARNING_MESSAGE);
-            lbStatus.setText("Informe os campos CNPJ e Senha.");
+            lbStatus.setText("Informe os campos Usuário e Senha.");
             return;
         }       
         
         String computador = SysInfo.nomeComputador();
-        String token = Md5Util.geraMd5Str(cnpj + computador);
+        String token = Md5Util.geraMd5Str(usuario + computador);
         
         LoginHTTP httpLogin = new LoginHTTP();
         try {
-            String retorno = httpLogin.login(cnpj, senha, computador);
+            String retorno = httpLogin.login(usuario, senha, computador, "0");
             
             if (token.equals(retorno)) {
-                JFrame principal = new AtualizaTabwinMain(cnpj, senha);
+                JFrame principal = new AtualizaTabwinMain(usuario, senha);
                 principal.setResizable(false);
                 this.dispose();
             } else {
-                JOptionPane.showMessageDialog(TelaLogin.this, "CNPJ ou Senha inválidos. Tente novamente.", "Atualização Tabwin",
+                JOptionPane.showMessageDialog(TelaLogin.this, "Usuário ou Senha inválidos. Tente novamente.", "Atualização Tabwin",
                     JOptionPane.ERROR_MESSAGE);
             }
             

@@ -24,10 +24,10 @@ import org.slf4j.LoggerFactory;
  */
 public class AtualizaTabwinMain extends javax.swing.JFrame {
 
-    public final static String versao = "1.8";
-    public final static String data = "31/08/2014";
+    public final static String versao = "1.9";
+    public final static String data = "15/09/2014";
     
-    private final String cnpj;
+    private final String usuario;
     private final String senha;
     private final String computador;
     
@@ -38,11 +38,11 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
     
     /**
      * Creates new form AtualizaTabwinMain
-     * @param cnpj
+     * @param usuario
      * @param senha
      */
-    public AtualizaTabwinMain(String cnpj, String senha) {
-        this.cnpj = cnpj;
+    public AtualizaTabwinMain(String usuario, String senha) {
+        this.usuario = usuario;
         this.senha = senha;
         this.computador = SysInfo.nomeComputador();
         this.config = new ConfigAtualizacao();
@@ -59,11 +59,11 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
     }
     
     protected final boolean loginApp(){
-        String token = Md5Util.geraMd5Str(cnpj + computador);
+        String token = Md5Util.geraMd5Str(usuario + computador);
         
         LoginHTTP httpLogin = new LoginHTTP();
         try {
-            String retorno = httpLogin.login(cnpj, senha, computador);
+            String retorno = httpLogin.login(usuario, senha, computador, "1");
             if (token.equals(retorno)) {
                 return true;
             } else {
