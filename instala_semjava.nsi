@@ -93,6 +93,9 @@ Section "Installation of ${AppName}" SecAppFiles
 			; If you add more sections be sure to add them here as well
   SetOutPath $INSTDIR
   File /r "dist\"
+  ;Permissoes na pasta do programa para todos usuarios
+  AccessControl::GrantOnFile $INSTDIR "(BU)" "GenericRead + GenericExecute + GenericWrite + Delete"
+  AccessControl::GrantOnFile $INSTDIR "(S-1-5-32-545)" "GenericRead + GenericExecute + GenericWrite + Delete"
   ; If you need the path to JRE, you can either get it here for from $JREPath
   ;  !insertmacro MUI_INSTALLOPTIONS_READ $0 "jre.ini" "UserDefinedSection" "JREPath"
   ;  MessageBox MB_OK "JRE Read: $0"
