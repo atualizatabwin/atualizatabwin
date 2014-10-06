@@ -27,6 +27,7 @@ public class TelaLogin extends javax.swing.JFrame {
         initComponents();
         URL url = AtualizaTabwinMain.class.getResource("/icone48.png");
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(url));
+        this.getRootPane().setDefaultButton(btAcessar);
     }
 
     /**
