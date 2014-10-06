@@ -4,16 +4,17 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.RandomAccessFile;
-import java.util.Arrays;
+import net.sf.sevenzipjbinding.ExtractAskMode;
 import net.sf.sevenzipjbinding.ExtractOperationResult;
+import net.sf.sevenzipjbinding.IArchiveExtractCallback;
 import net.sf.sevenzipjbinding.ISequentialOutStream;
 import net.sf.sevenzipjbinding.ISevenZipInArchive;
+import net.sf.sevenzipjbinding.PropID;
 import net.sf.sevenzipjbinding.SevenZip;
 import net.sf.sevenzipjbinding.SevenZipException;
 import net.sf.sevenzipjbinding.impl.RandomAccessFileInStream;
-import net.sf.sevenzipjbinding.simple.ISimpleInArchive;
-import net.sf.sevenzipjbinding.simple.ISimpleInArchiveItem;
 import org.slf4j.LoggerFactory;
 
 /**
@@ -32,68 +33,129 @@ public class SeteZipUtil {
         try {
             randomAccessFile = new RandomAccessFile(arquivoCompactado, "r");
             inArchive = SevenZip.openInArchive(null, new RandomAccessFileInStream(randomAccessFile));
-            
-            // Getting simple interface of the archive inArchive
-            ISimpleInArchive simpleInArchive = inArchive.getSimpleInterface();
-            
-            for (final ISimpleInArchiveItem item : simpleInArchive.getArchiveItems()) {
-                final int[] hash = new int[] { 0 };
-                if (!item.isFolder()) {
-                    ExtractOperationResult result;
-
-                    final long[] sizeArray = new long[1];
-                    result = item.extractSlow(new ISequentialOutStream() {
-                        
-                        @Override
-                        public int write(byte[] data) throws SevenZipException {
-                            
-                            //Write to file
-                            FileOutputStream fos;
-                            try {
-                                File file = new File(pastaSaida + File.separator + item.getPath());
-                                file.getParentFile().mkdirs();
-                                fos = new FileOutputStream(file);
-                                fos.write(data);
-                                fos.close();
-                            } catch (FileNotFoundException e) {
-                                logger.error("Erro ao criar arquivo de saida.");
-                            } catch (IOException e) {
-                                logger.error("Erro ao criar arquivo de saida.");
-                            }
-                            
-                            hash[0] ^= Arrays.hashCode(data); // Consume data
-                            sizeArray[0] += data.length;
-                            return data.length; // Return amount of consumed data
-                        }
-                    });
-                    if (result == ExtractOperationResult.OK) {
-                        logger.debug(String.format("%9X | %10s | %s", hash[0], sizeArray[0], item.getPath()));
-                    } else {
-                        logger.error("Error extracting item: " + result);
-                    }
-                }
-            }
-
+            inArchive.extract(null, false, new MyExtractCallback(inArchive, pastaSaida));
+            logger.info("Descompactando arquivo: " + arquivoCompactado + " / Formato: " + inArchive.getArchiveFormat().toString());
         } catch (FileNotFoundException ex) {
-            logger.error("Não foi possível encontrar o arquivo: " + arquivoCompactado);
+            logger.error("Não foi possível encontrar o arquivo: " + arquivoCompactado, ex);
         } catch (SevenZipException ex) {
-            logger.error("Erro ao descompactar com 7zipbinding");
+            logger.error("Erro ao descompactar com 7-Zip-Jbinding", ex);
         } finally {
             if (inArchive != null) {
                 try {
                     inArchive.close();
-                } catch (SevenZipException e) {
-                    logger.error("Error closing archive: " + e);
+                } catch (SevenZipException ex) {
+                    logger.error("Erro ao fechar o arquivo: " + arquivoCompactado, ex);
                 }
             }
             if (randomAccessFile != null) {
                 try {
                     randomAccessFile.close();
-                } catch (IOException e) {
-                    logger.error("Error closing file: " + e);
+                } catch (IOException ex) {
+                    logger.error("Erro ao fechar o arquivo: " + arquivoCompactado, ex);
                 }
             }
 
+        }
+    }
+
+    private static class MyExtractCallback implements IArchiveExtractCallback {
+
+        private final ISevenZipInArchive inArchive;
+        private final String extractPath;
+        private int index;
+        private OutputStream outputStream;
+        private File file;
+        private boolean isFolder;
+
+        public MyExtractCallback(ISevenZipInArchive inArchive, String extractPath) {
+            this.inArchive = inArchive;
+            this.extractPath = extractPath;
+        }
+
+        @Override
+        public ISequentialOutStream getStream(final int index, ExtractAskMode extractAskMode) throws SevenZipException {
+
+            this.index = index;
+            this.isFolder = (Boolean) inArchive.getProperty(index, PropID.IS_FOLDER);
+            String filePath = (String) inArchive.getStringProperty(index, PropID.PATH);
+
+            if (extractAskMode != ExtractAskMode.EXTRACT) {
+                return null;
+            }
+
+            logger.debug("Processando arquivo: " + filePath);
+
+            closeOutputStream();
+
+            file = new File(extractPath + File.separator + filePath);
+
+            if (isFolder) {
+                createDirectory(file);
+                return null;
+            }
+
+            createDirectory(file.getParentFile());
+
+            try {
+                outputStream = new FileOutputStream(file);
+            } catch (FileNotFoundException e) {
+                logger.error("Could not create FileOutputStream", e);
+            }
+
+            return new ISequentialOutStream() {
+                @Override
+                public int write(byte[] data) throws SevenZipException {
+
+                    try {
+                        outputStream.write(data);
+                    } catch (IOException e) {
+                        logger.error("IOException while extracting " + file.getAbsolutePath());
+                    }
+
+                    return data.length;
+                }
+            };
+        }
+
+        private void closeOutputStream() throws SevenZipException {
+            if (outputStream != null) {
+                try {
+                    outputStream.flush();
+                    outputStream.close();
+                    outputStream = null;
+                } catch (IOException e) {
+                    logger.error("Could not close FileOutputStream", e);
+                }
+            }
+        }
+
+        private void createDirectory(File parentFile) throws SevenZipException {
+            if (!parentFile.exists()) {
+                if (!parentFile.mkdirs()) {
+                    logger.error("Não foi possível criar diretório:" + parentFile.getAbsolutePath());
+                }
+            }
+        }
+
+        @Override
+        public void prepareOperation(ExtractAskMode extractAskMode) throws SevenZipException {
+        }
+
+        @Override
+        public void setOperationResult(ExtractOperationResult extractOperationResult) throws SevenZipException {
+            closeOutputStream();
+            String path = (String) inArchive.getProperty(index, PropID.PATH);
+            if (extractOperationResult != ExtractOperationResult.OK) {
+                logger.error("Não foi possível descompactar o arquivo:" + path);
+            }
+        }
+
+        @Override
+        public void setCompleted(long completeValue) throws SevenZipException {
+        }
+
+        @Override
+        public void setTotal(long total) throws SevenZipException {
         }
     }
 }

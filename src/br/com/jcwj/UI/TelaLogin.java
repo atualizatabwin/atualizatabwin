@@ -28,6 +28,7 @@ public class TelaLogin extends javax.swing.JFrame {
         URL url = AtualizaTabwinMain.class.getResource("/icone48.png");
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(url));
         this.getRootPane().setDefaultButton(btAcessar);
+        lbVersao.setText("Versão: " + AtualizaTabwinMain.versao + " - " + AtualizaTabwinMain.data);
     }
 
     /**
@@ -52,6 +53,7 @@ public class TelaLogin extends javax.swing.JFrame {
         edConta = new javax.swing.JFormattedTextField();
         lbStatus = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        lbVersao = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Acesso ao Atualiza Tabwin");
@@ -135,6 +137,9 @@ public class TelaLogin extends javax.swing.JFrame {
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icone48.png"))); // NOI18N
 
+        lbVersao.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbVersao.setText(" ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -155,7 +160,9 @@ public class TelaLogin extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel1))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbVersao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jLabel5))
                 .addGap(0, 17, Short.MAX_VALUE))
         );
@@ -166,7 +173,8 @@ public class TelaLogin extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jLabel1)
-                        .addGap(12, 12, 12))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbVersao))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel6)))
@@ -276,5 +284,6 @@ public class TelaLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbStatus;
+    private javax.swing.JLabel lbVersao;
     // End of variables declaration//GEN-END:variables
 }

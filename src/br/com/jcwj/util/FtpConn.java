@@ -47,6 +47,7 @@ public class FtpConn {
 		System.exit(2);
         }
         ftp.enterLocalPassiveMode();
+        ftp.setControlKeepAliveTimeout(300);
         return ftp;
     }
     

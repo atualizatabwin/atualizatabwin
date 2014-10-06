@@ -56,7 +56,7 @@ public class Tabwin {
     public static boolean instalaTabwin(String caminho, FTPClient ftpClient, AtualizaWorker work) throws IOException {
         boolean downArq;
         downArq = FtpUtil.downloadArquivo(ftpClient, "/tabwin/tabwin/tab36b.zip", caminho + "\\download\\tab36b.zip", work);    
-        ZipUtil.unZip(caminho + "\\download\\tab36b.zip", caminho);
+        SeteZipUtil.descompacta(caminho + "\\download\\tab36b.zip", caminho);
         return downArq;
     }
     
@@ -127,7 +127,8 @@ public class Tabwin {
         for( int i=0; i < arquivos.length; i++ ) {
             nomeArq = arquivos[i].getName();
             FtpUtil.downloadArquivo(ftpClient, nomeArq, dirLocal + nomeArq, work);
-            ZipUtil.unExeZip(dirLocal + nomeArq, caminho + "\\Definicoes\\CIHA");
+            //ZipUtil.unExeZip(dirLocal + nomeArq, caminho + "\\Definicoes\\CIHA");
+            SeteZipUtil.descompacta(dirLocal + nomeArq, caminho + "\\Definicoes\\CIHA");
         }
         //FtpUtil.downloadArquivo(ftpClient, "/dissemin/publicos/CIHA/201101_/Auxiliar/tab_ciha_201304.exe", caminho + "\\download\\tab_ciha_201304.exe", work);
         //ZipUtil.unExeZip(caminho + "\\download\\tab_ciha_201304.exe", caminho + "\\CIHA");

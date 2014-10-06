@@ -84,7 +84,7 @@
                                   <Component id="cbEstados" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="btAtualizar" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
+                                  <EmptySpace pref="83" max="32767" attributes="0"/>
                                   <Component id="btExecTabwin" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="btSobre" min="-2" max="-2" attributes="0"/>
@@ -561,7 +561,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane1" alignment="0" pref="777" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" alignment="0" pref="781" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -611,7 +611,7 @@
                               <Component id="checkUsaMsbbs" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="checkVerDataFtp" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="290" max="32767" attributes="0"/>
+                          <EmptySpace pref="294" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>

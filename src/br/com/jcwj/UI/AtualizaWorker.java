@@ -51,8 +51,7 @@ public class AtualizaWorker extends SwingWorker<String, String>  {
         String pathTabwin = config.getPathTabwin();
         String ufDados = config.getUfDados();
         String ufDadosRegex = config.getUfDadosRegex();
-        
-        
+                
         publish("Conectando ao FTP: ftp.datasus.gov.br...");
         FTPClient ftp = new FtpConn().getConn("ftp.datasus.gov.br");
         publish("OK \n");

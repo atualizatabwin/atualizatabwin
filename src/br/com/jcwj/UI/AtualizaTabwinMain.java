@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
  */
 public class AtualizaTabwinMain extends javax.swing.JFrame {
 
-    public final static String versao = "2.0.6";
+    public final static String versao = "2.0.7";
     public final static String data = "06/10/2014";
     
     private final String usuario;
@@ -34,6 +34,9 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
     private String[] listaEstados;
     private String[] listaEstadosRegex;
     private final ConfigAtualizacao config;
+    
+    private AtualizaWorker work = null;
+    
     private static final Logger logger = LoggerFactory.getLogger(AtualizaTabwinMain.class);
     
     /**
@@ -414,7 +417,7 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
                                     .addComponent(cbEstados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
                                     .addComponent(btAtualizar)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
                                     .addComponent(btExecTabwin)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(btSobre))))
@@ -460,7 +463,7 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
             jPanel5.setLayout(jPanel5Layout);
             jPanel5Layout.setHorizontalGroup(
                 jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 777, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 781, Short.MAX_VALUE)
             );
             jPanel5Layout.setVerticalGroup(
                 jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -482,7 +485,7 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
                     .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(checkUsaMsbbs)
                         .addComponent(checkVerDataFtp))
-                    .addContainerGap(290, Short.MAX_VALUE))
+                    .addContainerGap(294, Short.MAX_VALUE))
             );
             jPanel6Layout.setVerticalGroup(
                 jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -694,7 +697,7 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
             return;
         }
         
-        final AtualizaWorker work = new AtualizaWorker(textLog, config, lbDownArq);
+        work = new AtualizaWorker(textLog, config, lbDownArq);
         
         work.addPropertyChangeListener(new PropertyChangeListener() {
             @Override
@@ -740,7 +743,7 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
             }
         });
         
-        work.execute();
+        work.execute();        
         
     }//GEN-LAST:event_btAtualizarActionPerformed
     
