@@ -24,8 +24,8 @@ import org.slf4j.LoggerFactory;
  */
 public class AtualizaTabwinMain extends javax.swing.JFrame {
 
-    public final static String versao = "1.9";
-    public final static String data = "15/09/2014";
+    public final static String versao = "2.0.6";
+    public final static String data = "06/10/2014";
     
     private final String usuario;
     private final String senha;

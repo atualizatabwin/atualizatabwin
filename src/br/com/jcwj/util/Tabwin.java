@@ -77,7 +77,8 @@ public class Tabwin {
         for( int i=0; i < arquivos.length; i++ ) {
             nomeArq = arquivos[i].getName();
             FtpUtil.downloadArquivo(ftpClient, nomeArq, dirLocal + nomeArq, work);
-            ZipUtil.unExeZip(dirLocal + nomeArq, caminho + "\\Definicoes\\SIH");
+            //ZipUtil.unExeZip(dirLocal + nomeArq, caminho + "\\Definicoes\\SIH");
+            SeteZipUtil.descompacta(dirLocal + nomeArq, caminho + "\\Definicoes\\SIH");
         }
         //FtpUtil.downloadArquivo(ftpClient, "/dissemin/publicos/SIHSUS/200801_/Auxiliar/TAB_SIH_2013-01.exe", caminho + "\\download\\TAB_SIH_2013-01.exe", work);
         //ZipUtil.unExeZip(caminho + "\\download\\TAB_SIH_2013-01.exe", caminho + "\\SIH");
@@ -101,7 +102,8 @@ public class Tabwin {
         for( int i=0; i < arquivos.length; i++ ) {
             nomeArq = arquivos[i].getName();
             FtpUtil.downloadArquivo(ftpClient, nomeArq, dirLocal + nomeArq, work);
-            ZipUtil.unExeZip(dirLocal + nomeArq, caminho + "\\Definicoes\\SIA");
+            //ZipUtil.unExeZip(dirLocal + nomeArq, caminho + "\\Definicoes\\SIA");
+            SeteZipUtil.descompacta(dirLocal + nomeArq, caminho + "\\Definicoes\\SIA");
         }
         //FtpUtil.downloadArquivo(ftpClient, "/dissemin/publicos/siasus/200801_/Auxiliar/TAB_SIA_2013-02.exe", caminho + "\\download\\TAB_SIA_2013-02.exe", work);
         //ZipUtil.unExeZip(caminho + "\\download\\TAB_SIA_2013-02.exe", caminho + "\\SIA");
