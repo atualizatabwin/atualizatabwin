@@ -116,7 +116,7 @@ public class Sobre extends javax.swing.JFrame {
             String url = "http://www.atualizatabwin.com.br";
             Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + url);
         } catch (IOException ex) {
-            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Sobre.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jLabel3MouseClicked
 
