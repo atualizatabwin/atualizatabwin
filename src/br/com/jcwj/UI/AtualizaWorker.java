@@ -94,28 +94,11 @@ public class AtualizaWorker extends SwingWorker<String, String>  {
         
         int i;       
         
-        if (config.isUsarMsbbsSih()) {
-            // Usa o ftp msbbs, pois os arquivo do SIHD(Reduzida AIH) saem antes neste FTP
-            publish("Conectando ao FTP: msbbs.datasus.gov.br...");
-            FTPClient ftp2 = new FtpConn().getConn("msbbs.datasus.gov.br");
-            publish("OK \n");    
-            List<String> dadosSIH = config.getDadosSIH();
-            for (i=0; i < dadosSIH.size(); i++) {
-                publish("Atualizando Dados SIH do estado: " + ufDados + " do ano: 20" + dadosSIH.get(i) + "...");
-                Tabwin.downloadDados(ftp2, config.isVerDataFtp(), "/Arquivos_Publicos/Estado_sc/", pathTabwin + "\\Dados\\SIH\\", "[Rr][Dd]" + ufDadosRegex  + dadosSIH.get(i) + "[0-9]{2}.[Dd][Bb][Cc]", this);
-                publish("OK \n");
-            }
-            publish("Desconectando do FTP: msbbs.datasus.gov.br...");
-            ftp2.logout();
-            ftp2.disconnect();
-        } else {
-            // Usa o ftp padrão.
-            List<String> dadosSIH = config.getDadosSIH();
-            for (i=0; i < dadosSIH.size(); i++) {
-                publish("Atualizando Dados SIH do estado: " + ufDados + " do ano: 20" + dadosSIH.get(i) + "...");
-                Tabwin.downloadDados(ftp, config.isVerDataFtp(), "/dissemin/publicos/SIHSUS/200801_/Dados", pathTabwin + "\\Dados\\SIH\\", "[Rr][Dd]" + ufDadosRegex + dadosSIH.get(i) + "[0-9]{2}.[Dd][Bb][Cc]", this);
-                publish("OK \n");
-            }
+        List<String> dadosSIH = config.getDadosSIH();
+        for (i=0; i < dadosSIH.size(); i++) {
+            publish("Atualizando Dados SIH do estado: " + ufDados + " do ano: 20" + dadosSIH.get(i) + "...");
+            Tabwin.downloadDados(ftp, config.isVerDataFtp(), "/dissemin/publicos/SIHSUS/200801_/Dados", pathTabwin + "\\Dados\\SIH\\", "[Rr][Dd]" + ufDadosRegex + dadosSIH.get(i) + "[0-9]{2}.[Dd][Bb][Cc]", this);
+            publish("OK \n");
         }
         
         setProgress(65);

@@ -24,7 +24,6 @@ public class ConfigAtualizacao {
     private boolean atuSIH;
     private boolean atuSIA;
     private boolean atuCIHA;
-    private boolean usarMsbbsSih;
     private boolean verDataFtp;
     
     private List<String> dadosSIH;
@@ -71,7 +70,6 @@ public class ConfigAtualizacao {
         properties.setProperty("atuSIH", Boolean.toString(atuSIH));
         properties.setProperty("atuSIA", Boolean.toString(atuSIA));
         properties.setProperty("atuCIHA", Boolean.toString(atuCIHA));
-        properties.setProperty("usarMsbbsSih", Boolean.toString(usarMsbbsSih));
         properties.setProperty("verDataFtp", Boolean.toString(verDataFtp));
         properties.setProperty("estadoSelecionado", Integer.toString(estadoSelecionado));
         properties.setProperty("anosSIH", StringUtils.join(dadosSIH, "|"));
@@ -103,7 +101,6 @@ public class ConfigAtualizacao {
         this.atuSIH = Boolean.parseBoolean(properties.getProperty("atuSIH", "true"));
         this.atuSIA = Boolean.parseBoolean(properties.getProperty("atuSIA", "true"));
         this.atuCIHA = Boolean.parseBoolean(properties.getProperty("atuCIHA", "true"));
-        this.usarMsbbsSih = Boolean.parseBoolean(properties.getProperty("usarMsbbsSih", "false"));
         this.verDataFtp = Boolean.parseBoolean(properties.getProperty("verDataFtp", "false"));
         this.estadoSelecionado = Integer.parseInt(properties.getProperty("estadoSelecionado", "23"));
         this.dadosSIH = new ArrayList<String>(Arrays.asList(StringUtils.split(properties.getProperty("anosSIH", "12|13"), "|")));
@@ -232,14 +229,6 @@ public class ConfigAtualizacao {
 
     public void setAtuCIHA(boolean atuCIHA) {
         this.atuCIHA = atuCIHA;
-    }
-    
-    public boolean isUsarMsbbsSih() {
-        return usarMsbbsSih;
-    }
-
-    public void setUsarMsbbsSih(boolean usarMsbbsSih) {
-        this.usarMsbbsSih = usarMsbbsSih;
     }
 
     public boolean isVerDataFtp() {

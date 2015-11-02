@@ -17,7 +17,7 @@
     <Property name="locationByPlatform" type="boolean" value="true"/>
     <Property name="name" type="java.lang.String" value="mainForm" noResource="true"/>
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[800, 490]"/>
+      <Dimension value="[820, 490]"/>
     </Property>
   </Properties>
   <SyntheticProperties>
@@ -67,39 +67,37 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="checkTabwin" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="edPathTabwin" min="-2" pref="144" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btSelPasta" min="-2" pref="20" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
-                                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="cbEstados" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="btAtualizar" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="83" max="32767" attributes="0"/>
-                                  <Component id="btExecTabwin" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btSobre" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="checkTabwin" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="jPanel1" min="-2" pref="272" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jPanel3" min="-2" pref="278" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jPanel4" min="-2" pref="224" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="edPathTabwin" min="-2" pref="144" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btSelPasta" min="-2" pref="20" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
+                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="cbEstados" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="btAtualizar" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="btExecTabwin" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btSobre" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <Group type="102" attributes="0">
-                          <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
-                      </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -119,7 +117,7 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="checkTabwin" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jPanel4" pref="117" max="32767" attributes="0"/>
                       <Component id="jPanel3" alignment="0" pref="117" max="32767" attributes="0"/>
@@ -182,13 +180,13 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <Component id="checkSIH2012" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="checkSIH2013" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="checkSIH2013" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="checkSIH2014" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="checkSIH2015" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="checkSIH2016" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
@@ -203,8 +201,11 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="checkSIH2011" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="checkSIH2012" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -220,15 +221,14 @@
                           <Component id="checkSIH2009" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="checkSIH2010" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="checkSIH2011" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="checkSIH2012" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="checkSIH2012" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="checkSIH2013" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="checkSIH2014" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="checkSIH2015" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="checkSIH2013" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="checkSIH2014" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="checkSIH2015" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="checkSIH2016" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -289,6 +289,12 @@
                 <Property name="text" type="java.lang.String" value="2015"/>
               </Properties>
             </Component>
+            <Component class="javax.swing.JCheckBox" name="checkSIH2016">
+              <Properties>
+                <Property name="selected" type="boolean" value="true"/>
+                <Property name="text" type="java.lang.String" value="2016"/>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel3">
@@ -310,13 +316,13 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="checkSIA2012" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="checkSIA2013" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="checkSIA2014" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="checkSIA2015" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="checkSIA2016" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="checkSIA2008" min="-2" max="-2" attributes="0"/>
@@ -326,11 +332,13 @@
                               <Component id="checkSIA2010" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="checkSIA2011" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="checkSIA2012" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="checkSIA" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="32" max="32767" attributes="0"/>
+                      <EmptySpace pref="11" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -350,18 +358,21 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="checkSIA2009" min="-2" max="-2" attributes="0"/>
                                   <Component id="checkSIA2010" min="-2" max="-2" attributes="0"/>
-                                  <Component id="checkSIA2011" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="checkSIA2011" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="checkSIA2012" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="checkSIA2015" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="checkSIA2014" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="checkSIA2013" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="checkSIA2012" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="checkSIA2014" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="checkSIA2015" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="checkSIA2016" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -421,6 +432,12 @@
                 <Property name="text" type="java.lang.String" value="2015"/>
               </Properties>
             </Component>
+            <Component class="javax.swing.JCheckBox" name="checkSIA2016">
+              <Properties>
+                <Property name="selected" type="boolean" value="true"/>
+                <Property name="text" type="java.lang.String" value="2016"/>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel4">
@@ -448,7 +465,11 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="checkCIHA2012" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="checkCIHA2015" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="checkCIHA2015" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="checkCIHA2016" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="checkCIHA2013" min="-2" max="-2" attributes="0"/>
@@ -458,7 +479,7 @@
                           <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="checkCIHA" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="32" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -489,7 +510,10 @@
                                   </Group>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="checkCIHA2015" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="checkCIHA2015" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="checkCIHA2016" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -537,6 +561,12 @@
                 <Property name="text" type="java.lang.String" value="2015"/>
               </Properties>
             </Component>
+            <Component class="javax.swing.JCheckBox" name="checkCIHA2016">
+              <Properties>
+                <Property name="selected" type="boolean" value="true"/>
+                <Property name="text" type="java.lang.String" value="2016"/>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
         <Component class="javax.swing.JButton" name="btSelPasta">
@@ -575,7 +605,7 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jTabbedPane1" alignment="0" max="32767" attributes="0"/>
+              <Component id="jTabbedPane1" alignment="0" pref="228" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -596,12 +626,12 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane1" alignment="0" pref="781" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" alignment="0" pref="815" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane1" alignment="0" pref="202" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" alignment="0" pref="200" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -642,11 +672,8 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="checkUsaMsbbs" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="checkVerDataFtp" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace pref="294" max="32767" attributes="0"/>
+                          <Component id="checkVerDataFtp" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="328" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -654,20 +681,13 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="checkUsaMsbbs" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="checkVerDataFtp" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="149" max="32767" attributes="0"/>
+                          <EmptySpace pref="170" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JCheckBox" name="checkUsaMsbbs">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Utilizar o ftp msbbs.datasus.gov.br para baixar dados do SIH."/>
-                  </Properties>
-                </Component>
                 <Component class="javax.swing.JCheckBox" name="checkVerDataFtp">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Baixar arquivos de dados somente se a data do arquivo remoto foi maior que a do arquivo local"/>

@@ -94,6 +94,7 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
         checkSIH2013 = new javax.swing.JCheckBox();
         checkSIH2014 = new javax.swing.JCheckBox();
         checkSIH2015 = new javax.swing.JCheckBox();
+        checkSIH2016 = new javax.swing.JCheckBox();
         jPanel3 = new javax.swing.JPanel();
         checkSIA = new javax.swing.JCheckBox();
         jLabel4 = new javax.swing.JLabel();
@@ -105,6 +106,7 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
         checkSIA2013 = new javax.swing.JCheckBox();
         checkSIA2014 = new javax.swing.JCheckBox();
         checkSIA2015 = new javax.swing.JCheckBox();
+        checkSIA2016 = new javax.swing.JCheckBox();
         jPanel4 = new javax.swing.JPanel();
         checkCIHA = new javax.swing.JCheckBox();
         jLabel5 = new javax.swing.JLabel();
@@ -113,6 +115,7 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
         checkCIHA2013 = new javax.swing.JCheckBox();
         checkCIHA2014 = new javax.swing.JCheckBox();
         checkCIHA2015 = new javax.swing.JCheckBox();
+        checkCIHA2016 = new javax.swing.JCheckBox();
         btSelPasta = new javax.swing.JButton();
         btExecTabwin = new javax.swing.JButton();
         btSobre = new javax.swing.JButton();
@@ -122,7 +125,6 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         textLog = new javax.swing.JTextArea();
         jPanel6 = new javax.swing.JPanel();
-        checkUsaMsbbs = new javax.swing.JCheckBox();
         checkVerDataFtp = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         bpGeral = new javax.swing.JProgressBar();
@@ -137,7 +139,7 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
             setTitle("Atualizador Tabwin");
             setLocationByPlatform(true);
             setName("mainForm"); // NOI18N
-            setPreferredSize(new java.awt.Dimension(800, 490));
+            setPreferredSize(new java.awt.Dimension(820, 490));
             addWindowListener(new java.awt.event.WindowAdapter() {
                 public void windowClosing(java.awt.event.WindowEvent evt) {
                     formWindowClosing(evt);
@@ -187,6 +189,9 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
             checkSIH2015.setSelected(true);
             checkSIH2015.setText("2015");
 
+            checkSIH2016.setSelected(true);
+            checkSIH2016.setText("2016");
+
             javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
             jPanel1.setLayout(jPanel1Layout);
             jPanel1Layout.setHorizontalGroup(
@@ -196,13 +201,13 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel3)
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(checkSIH2012)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(checkSIH2013)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(checkSIH2014)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(checkSIH2015))
+                            .addComponent(checkSIH2015)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(checkSIH2016))
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(checkSIH, javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,7 +218,10 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(checkSIH2010)))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(checkSIH2011))))
+                            .addComponent(checkSIH2011)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(checkSIH2012)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             );
             jPanel1Layout.setVerticalGroup(
                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,14 +234,14 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
                         .addComponent(checkSIH2008)
                         .addComponent(checkSIH2009)
                         .addComponent(checkSIH2010)
-                        .addComponent(checkSIH2011))
+                        .addComponent(checkSIH2011)
+                        .addComponent(checkSIH2012))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(checkSIH2012)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(checkSIH2013)
-                            .addComponent(checkSIH2014)
-                            .addComponent(checkSIH2015))))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(checkSIH2013)
+                        .addComponent(checkSIH2014)
+                        .addComponent(checkSIH2015)
+                        .addComponent(checkSIH2016)))
             );
 
             jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(" SIA (Ambulatorial SUS) "));
@@ -263,6 +271,9 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
             checkSIA2015.setSelected(true);
             checkSIA2015.setText("2015");
 
+            checkSIA2016.setSelected(true);
+            checkSIA2016.setText("2016");
+
             javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
             jPanel3.setLayout(jPanel3Layout);
             jPanel3Layout.setHorizontalGroup(
@@ -271,13 +282,13 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
                     .addContainerGap()
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addComponent(checkSIA2012)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(checkSIA2013)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(checkSIA2014)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(checkSIA2015))
+                            .addComponent(checkSIA2015)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(checkSIA2016))
                         .addGroup(jPanel3Layout.createSequentialGroup()
                             .addComponent(checkSIA2008)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -285,10 +296,12 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(checkSIA2010)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(checkSIA2011))
+                            .addComponent(checkSIA2011)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(checkSIA2012))
                         .addComponent(checkSIA)
                         .addComponent(jLabel4))
-                    .addContainerGap(32, Short.MAX_VALUE))
+                    .addContainerGap(11, Short.MAX_VALUE))
             );
             jPanel3Layout.setVerticalGroup(
                 jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -305,14 +318,16 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(checkSIA2009)
                                 .addComponent(checkSIA2010)
-                                .addComponent(checkSIA2011))))
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(checkSIA2011)
+                                    .addComponent(checkSIA2012)))))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(checkSIA2015)
-                        .addComponent(checkSIA2014)
                         .addComponent(checkSIA2013)
-                        .addComponent(checkSIA2012))
-                    .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(checkSIA2014)
+                        .addComponent(checkSIA2015)
+                        .addComponent(checkSIA2016))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             );
 
             jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(" CIHA (dados não-SUS) "));
@@ -336,6 +351,9 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
             checkCIHA2015.setSelected(true);
             checkCIHA2015.setText("2015");
 
+            checkCIHA2016.setSelected(true);
+            checkCIHA2016.setText("2016");
+
             javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
             jPanel4.setLayout(jPanel4Layout);
             jPanel4Layout.setHorizontalGroup(
@@ -349,14 +367,17 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
                                     .addComponent(checkCIHA2011)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(checkCIHA2012))
-                                .addComponent(checkCIHA2015))
+                                .addGroup(jPanel4Layout.createSequentialGroup()
+                                    .addComponent(checkCIHA2015)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(checkCIHA2016)))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(checkCIHA2013)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(checkCIHA2014))
                         .addComponent(jLabel5)
                         .addComponent(checkCIHA))
-                    .addContainerGap(32, Short.MAX_VALUE))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             );
             jPanel4Layout.setVerticalGroup(
                 jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -380,7 +401,9 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
                                     .addGap(18, 18, 18)
                                     .addComponent(checkCIHA2012)))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(checkCIHA2015)))
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(checkCIHA2015)
+                                .addComponent(checkCIHA2016))))
                     .addContainerGap())
             );
 
@@ -411,34 +434,33 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
                 jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanelTopLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanelTopLayout.createSequentialGroup()
-                            .addGap(14, 14, 14)
-                            .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(checkTabwin)
-                                .addGroup(jPanelTopLayout.createSequentialGroup()
-                                    .addComponent(jLabel1)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(edPathTabwin, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(btSelPasta, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(87, 87, 87)
-                                    .addComponent(jLabel2)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(cbEstados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(btAtualizar)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
-                                    .addComponent(btExecTabwin)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(btSobre))))
-                        .addGroup(jPanelTopLayout.createSequentialGroup()
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(checkTabwin)
+                        .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanelTopLayout.createSequentialGroup()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelTopLayout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(edPathTabwin, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btSelPasta, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(87, 87, 87)
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbEstados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btAtualizar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btExecTabwin)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btSobre)
+                                .addContainerGap()))))
             );
             jPanelTopLayout.setVerticalGroup(
                 jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -455,7 +477,7 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
                         .addComponent(btSobre))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(checkTabwin)
-                    .addGap(5, 5, 5)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addGroup(jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
@@ -474,16 +496,14 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
             jPanel5.setLayout(jPanel5Layout);
             jPanel5Layout.setHorizontalGroup(
                 jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 781, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 815, Short.MAX_VALUE)
             );
             jPanel5Layout.setVerticalGroup(
                 jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
             );
 
             jTabbedPane1.addTab("Log", jPanel5);
-
-            checkUsaMsbbs.setText("Utilizar o ftp msbbs.datasus.gov.br para baixar dados do SIH.");
 
             checkVerDataFtp.setText("Baixar arquivos de dados somente se a data do arquivo remoto foi maior que a do arquivo local");
 
@@ -493,19 +513,15 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
                 jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel6Layout.createSequentialGroup()
                     .addContainerGap()
-                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(checkUsaMsbbs)
-                        .addComponent(checkVerDataFtp))
-                    .addContainerGap(294, Short.MAX_VALUE))
+                    .addComponent(checkVerDataFtp)
+                    .addContainerGap(328, Short.MAX_VALUE))
             );
             jPanel6Layout.setVerticalGroup(
                 jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel6Layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(checkUsaMsbbs)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(checkVerDataFtp)
-                    .addContainerGap(149, Short.MAX_VALUE))
+                    .addContainerGap(170, Short.MAX_VALUE))
             );
 
             jTabbedPane1.addTab("Configurações", jPanel6);
@@ -518,7 +534,7 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
             );
             jPanelBotLayout.setVerticalGroup(
                 jPanelBotLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jTabbedPane1)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
             );
 
             bpGeral.setStringPainted(true);
@@ -599,6 +615,7 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
         checkSIH2013.setEnabled(estado);
         checkSIH2014.setEnabled(estado);
         checkSIH2015.setEnabled(estado);
+        checkSIH2016.setEnabled(estado);
         checkSIA2008.setEnabled(estado);
         checkSIA2009.setEnabled(estado);
         checkSIA2010.setEnabled(estado);
@@ -607,11 +624,13 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
         checkSIA2013.setEnabled(estado);
         checkSIA2014.setEnabled(estado);
         checkSIA2015.setEnabled(estado);
+        checkSIA2016.setEnabled(estado);
         checkCIHA2011.setEnabled(estado);
         checkCIHA2012.setEnabled(estado);
         checkCIHA2013.setEnabled(estado);
         checkCIHA2014.setEnabled(estado);
         checkCIHA2015.setEnabled(estado);
+        checkCIHA2016.setEnabled(estado);
     }
     
     /**
@@ -624,7 +643,6 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
         checkSIH.setSelected(config.isAtuSIH());
         checkSIA.setSelected(config.isAtuSIA());
         checkCIHA.setSelected(config.isAtuCIHA());
-        checkUsaMsbbs.setSelected(config.isUsarMsbbsSih());
         checkVerDataFtp.setSelected(config.isVerDataFtp());
         this.listaEstados = config.getEstados();
         this.listaEstadosRegex = config.getEstadosRegex();
@@ -639,7 +657,7 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
         checkSIH2013.setSelected(config.getDadosSIH().contains("13"));
         checkSIH2014.setSelected(config.getDadosSIH().contains("14"));
         checkSIH2015.setSelected(config.getDadosSIH().contains("15"));
-        
+        checkSIH2016.setSelected(config.getDadosSIH().contains("16"));
         
         checkSIA2008.setSelected(config.getDadosSIA().contains("08"));
         checkSIA2009.setSelected(config.getDadosSIA().contains("09"));
@@ -649,13 +667,15 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
         checkSIA2013.setSelected(config.getDadosSIA().contains("13"));
         checkSIA2014.setSelected(config.getDadosSIA().contains("14"));
         checkSIA2015.setSelected(config.getDadosSIA().contains("15"));
+        checkSIA2016.setSelected(config.getDadosSIA().contains("16"));
         
         checkCIHA2011.setSelected(config.getDadosCIHA().contains("11"));
         checkCIHA2012.setSelected(config.getDadosCIHA().contains("12"));
         checkCIHA2013.setSelected(config.getDadosCIHA().contains("13"));
         checkCIHA2014.setSelected(config.getDadosCIHA().contains("14"));
         checkCIHA2015.setSelected(config.getDadosCIHA().contains("15"));
-
+        checkCIHA2016.setSelected(config.getDadosCIHA().contains("16"));
+        
     }
     
     /**
@@ -669,7 +689,6 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
         config.setAtuCIHA(checkCIHA.isSelected());
         config.setUfDados(listaEstados[cbEstados.getSelectedIndex()]);
         config.setUfDadosRegex(listaEstadosRegex[cbEstados.getSelectedIndex()]);
-        config.setUsarMsbbsSih(checkUsaMsbbs.isSelected());
         config.setVerDataFtp(checkVerDataFtp.isSelected());
         config.setEstadoSelecionado(cbEstados.getSelectedIndex());
         
@@ -681,6 +700,7 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
         if (checkSIH2013.isSelected()) { config.addDadosSIH("13"); } else { config.delDadosSIH("13"); }
         if (checkSIH2014.isSelected()) { config.addDadosSIH("14"); } else { config.delDadosSIH("14"); }
         if (checkSIH2015.isSelected()) { config.addDadosSIH("15"); } else { config.delDadosSIH("15"); }
+        if (checkSIH2016.isSelected()) { config.addDadosSIH("16"); } else { config.delDadosSIH("16"); }
         
         if (checkSIA2008.isSelected()) { config.addDadosSIA("08"); } else { config.delDadosSIA("08"); }
         if (checkSIA2009.isSelected()) { config.addDadosSIA("09"); } else { config.delDadosSIA("09"); }
@@ -690,12 +710,14 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
         if (checkSIA2013.isSelected()) { config.addDadosSIA("13"); } else { config.delDadosSIA("13"); }
         if (checkSIA2014.isSelected()) { config.addDadosSIA("14"); } else { config.delDadosSIA("14"); }
         if (checkSIA2015.isSelected()) { config.addDadosSIA("15"); } else { config.delDadosSIA("15"); }
+        if (checkSIA2016.isSelected()) { config.addDadosSIA("16"); } else { config.delDadosSIA("16"); }
         
         if (checkCIHA2011.isSelected()) { config.addDadosCIHA("11"); } else { config.delDadosCIHA("11"); }
         if (checkCIHA2012.isSelected()) { config.addDadosCIHA("12"); } else { config.delDadosCIHA("12"); }
         if (checkCIHA2013.isSelected()) { config.addDadosCIHA("13"); } else { config.delDadosCIHA("13"); }
         if (checkCIHA2014.isSelected()) { config.addDadosCIHA("14"); } else { config.delDadosCIHA("14"); }
         if (checkCIHA2015.isSelected()) { config.addDadosCIHA("15"); } else { config.delDadosCIHA("15"); }
+        if (checkCIHA2016.isSelected()) { config.addDadosCIHA("16"); } else { config.delDadosCIHA("16"); }
         
         config.salvarConfiguracao();
     }
@@ -816,6 +838,7 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
     private javax.swing.JCheckBox checkCIHA2013;
     private javax.swing.JCheckBox checkCIHA2014;
     private javax.swing.JCheckBox checkCIHA2015;
+    private javax.swing.JCheckBox checkCIHA2016;
     private javax.swing.JCheckBox checkSIA;
     private javax.swing.JCheckBox checkSIA2008;
     private javax.swing.JCheckBox checkSIA2009;
@@ -825,6 +848,7 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
     private javax.swing.JCheckBox checkSIA2013;
     private javax.swing.JCheckBox checkSIA2014;
     private javax.swing.JCheckBox checkSIA2015;
+    private javax.swing.JCheckBox checkSIA2016;
     private javax.swing.JCheckBox checkSIH;
     private javax.swing.JCheckBox checkSIH2008;
     private javax.swing.JCheckBox checkSIH2009;
@@ -834,8 +858,8 @@ public class AtualizaTabwinMain extends javax.swing.JFrame {
     private javax.swing.JCheckBox checkSIH2013;
     private javax.swing.JCheckBox checkSIH2014;
     private javax.swing.JCheckBox checkSIH2015;
+    private javax.swing.JCheckBox checkSIH2016;
     private javax.swing.JCheckBox checkTabwin;
-    private javax.swing.JCheckBox checkUsaMsbbs;
     private javax.swing.JCheckBox checkVerDataFtp;
     private javax.swing.JTextField edPathTabwin;
     private javax.swing.JFileChooser fileChooser;
